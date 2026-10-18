@@ -13,7 +13,7 @@ export const site = {
   // Google Apps Script web app URL that receives every form. See apps-script/README.md.
   formEndpoint: 'https://script.google.com/macros/s/AKfycbz-2-vD3FvSBpV4e1B-g6nFw7-J_7SiwGP3iutn1TDk2wTU10G4iqbDuOAUeSrPDxQ02A/exec',
   // Google Analytics 4 measurement ID, for example G-XXXXXXXXXX. Left empty, no analytics load.
-  gaId: '',
+  gaId: 'G-M46W867X6W',
   appStoreUrl: null as string | null,
 } as const;
 
