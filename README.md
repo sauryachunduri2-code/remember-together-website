@@ -32,7 +32,7 @@ npm run build    # outputs to dist/
 - One radius (`--radius`), one border style, no shadows, no gradients.
 - Headings: Source Serif 4. Body: Atkinson Hyperlegible. Sizes come only from the type ramp in `tokens.css`.
 - The app's 20 "not vibe coded" rules apply here too (see the app's `SPEC.md`).
-- No decorative motion. Only state changes the person caused may transition.
+- No decorative motion. Only state changes the person caused may animate: the mobile menu, form success and errors, the story form's name field, button presses, and smooth jumps to sections. All motion goes through `src/scripts/motion.ts` (Motion's small `motion/mini` build), stays between 120 and 250ms with no overshoot, and turns off when the device asks for reduced motion.
 - Copy: plain, specific, short sentences, no em dashes.
 
 ## Before launch

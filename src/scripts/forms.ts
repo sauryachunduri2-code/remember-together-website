@@ -1,4 +1,5 @@
 // Validation, sending, and loading / success / error states for every form on the site.
+import { collapse, conceal, drawCheck, expand, reveal } from './motion';
 
 type FieldElement = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 
@@ -18,7 +19,10 @@ function showFieldError(field: FieldElement, message: string | null) {
   const error = errorFor(field);
   if (message) {
     field.setAttribute('aria-invalid', 'true');
-    if (error) { error.textContent = message; error.hidden = false; }
+    if (error) {
+      error.textContent = message;
+      if (error.hidden) reveal(error, { y: -4, duration: 0.15 });
+    }
   } else {
     field.removeAttribute('aria-invalid');
     if (error) { error.textContent = ''; error.hidden = true; }
@@ -38,15 +42,17 @@ function wireConditionalFields(form: HTMLFormElement) {
   form.querySelectorAll<HTMLElement>('[data-hide-when]').forEach((block) => {
     const toggle = form.querySelector<HTMLInputElement>(`input[name="${block.dataset.hideWhen}"]`);
     if (!toggle) return;
-    const sync = () => {
-      block.hidden = toggle.checked;
+    const sync = (animated: boolean) => {
       block.querySelectorAll<FieldElement>('input, textarea, select').forEach((field) => {
         field.disabled = toggle.checked;
         if (toggle.checked) showFieldError(field, null);
       });
+      if (!animated) block.hidden = toggle.checked;
+      else if (toggle.checked) collapse(block);
+      else expand(block);
     };
-    toggle.addEventListener('change', sync);
-    sync();
+    toggle.addEventListener('change', () => sync(true));
+    sync(false);
   });
 }
 
@@ -113,7 +119,7 @@ function wire(form: HTMLFormElement) {
 
   const showError = (message: string) => {
     errorText.textContent = message;
-    errorBox.hidden = false;
+    if (errorBox.hidden) reveal(errorBox, { y: -4, duration: 0.15 });
   };
 
   form.addEventListener('submit', async (event) => {
@@ -137,9 +143,10 @@ function wire(form: HTMLFormElement) {
     setLoading(button, true);
     try {
       await send(endpoint, collect(form));
-      form.hidden = true;
-      success.hidden = false;
+      await conceal(form);
+      reveal(success);
       success.focus();
+      drawCheck(success.querySelector('.success-mark svg'));
       if (typeof window.gtag === 'function') window.gtag('event', 'form_submit', { form_name: form.dataset.rtForm });
     } catch {
       showError(`We could not send that. Please check your internet connection and try again. If it still does not work, email us at ${email}.`);
@@ -153,7 +160,7 @@ function wire(form: HTMLFormElement) {
     fieldsOf(form).forEach((field) => showFieldError(field, null));
     form.querySelectorAll<HTMLInputElement>('input[type="checkbox"]').forEach((box) => box.dispatchEvent(new Event('change')));
     success.hidden = true;
-    form.hidden = false;
+    reveal(form);
     fieldsOf(form)[0]?.focus();
   });
 }

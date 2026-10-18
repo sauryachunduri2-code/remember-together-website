@@ -69,12 +69,18 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
 </header>
 
 <script>
+  import { collapse, expand, initPressFeedback } from '../scripts/motion';
+
+  initPressFeedback();
+
   const button = document.querySelector<HTMLButtonElement>('.menu-button');
   const menu = document.getElementById('mobile-menu');
   if (button && menu) {
-    const setOpen = (open: boolean) => {
+    const setOpen = (open: boolean, animated = true) => {
       button.setAttribute('aria-expanded', String(open));
-      menu.hidden = !open;
+      if (!animated) menu.hidden = !open;
+      else if (open) expand(menu);
+      else collapse(menu);
       const label = button.querySelector('.menu-label');
       if (label) label.textContent = open ? 'Close' : 'Menu';
     };
@@ -87,7 +93,7 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
     });
     // If the window grows into the desktop layout, close the mobile menu.
     window.addEventListener('resize', () => {
-      if (getComputedStyle(button).display === 'none') setOpen(false);
+      if (getComputedStyle(button).display === 'none' && !menu.hidden) setOpen(false, false);
     });
   }
 </script>

@@ -4,6 +4,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: var(--s-6); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 body {
   min-height: 100vh;
   background: var(--paper);
@@ -112,10 +113,9 @@ a[href^='mailto:'] { overflow-wrap: anywhere; }
   text-decoration: none;
   text-wrap: balance;
   padding-block: var(--s-2);
-  transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease), transform var(--fast) var(--ease);
+  transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease);
 }
 .button:hover { text-decoration: none; }
-.button:active { transform: translateY(1px); }
 .button svg { width: 1.25em; height: 1.25em; flex: none; }
 
 .button--primary { background: var(--action); color: var(--on-action); }

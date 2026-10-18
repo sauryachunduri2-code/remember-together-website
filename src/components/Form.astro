@@ -64,7 +64,6 @@ const { name, submitLabel, successTitle, successText, class: className } = Astro
     outline: none;
   }
   .form-success[hidden] { display: none; }
-  .form-success:not([hidden]) { animation: settle var(--base) var(--ease); }
   .success-mark {
     display: inline-flex; align-items: center; justify-content: center; flex: none;
     width: var(--s-7); height: var(--s-7);
@@ -75,5 +74,4 @@ const { name, submitLabel, successTitle, successText, class: className } = Astro
   .success-body > * + * { margin-top: var(--s-2); }
   .success-title { font-family: var(--font-serif); font-weight: 600; font-size: var(--text-xl); line-height: var(--lh-xl); }
   .form-reset { padding-inline: 0; border: 0; background: none; }
-  @keyframes settle { from { opacity: 0; } to { opacity: 1; } }
 </style>
