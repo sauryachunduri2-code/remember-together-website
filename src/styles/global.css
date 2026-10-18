@@ -20,7 +20,8 @@ img, svg, video { display: block; max-width: 100%; height: auto; }
 input, button, textarea, select { font: inherit; color: inherit; }
 button { cursor: pointer; }
 p, li, h1, h2, h3, h4, dd { overflow-wrap: break-word; }
-ul[role='list'], ol[role='list'] { list-style: none; padding: 0; }
+/* Zero specificity, so any component's own padding (like the mobile menu's side gutter) still applies. */
+:where(ul, ol)[role='list'] { list-style: none; padding: 0; }
 [hidden] { display: none !important; }
 
 /* ---------- Typography ---------- */

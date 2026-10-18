@@ -113,14 +113,6 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
   }
   @media (min-width: 40rem) { .utility-note { display: block; } }
   .utility-actions { display: flex; align-items: center; gap: var(--s-5); margin-left: auto; }
-  @media (max-width: 29.99rem) {
-    .utility-link { display: none; }
-    .utility-actions :global(.text-size-label) { display: none; }
-  }
-  @media (max-width: 25.99rem) {
-    .menu-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-    .menu-button { width: var(--tap-sm); padding: 0; }
-  }
   .utility-link {
     display: inline-flex; align-items: center; min-height: var(--tap-sm);
     color: var(--on-feature); font-size: var(--text-sm); font-weight: 700;
@@ -131,26 +123,34 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
     border-bottom: var(--border);
   }
   .header-inner {
-    display: flex; align-items: center; gap: var(--s-5);
+    display: flex; align-items: center; gap: var(--s-4);
     min-height: 5rem;
   }
+  /* The brand may shrink and wrap, so the buttons beside it never get pushed off screen. */
   .brand {
     display: inline-flex; align-items: center; gap: var(--s-3);
-    color: var(--ink); text-decoration: none;
+    min-width: 0;
     min-height: var(--tap-sm);
+    color: var(--ink); text-decoration: none;
   }
-  .brand-logo { width: 2.75rem; height: 2.75rem; }
+  .brand-logo { width: 2.75rem; height: 2.75rem; flex: none; }
   .brand-name {
     font-family: var(--font-serif); font-weight: 600;
     font-size: var(--text-lg); line-height: 1.2;
   }
-  @media (max-width: 26rem) { .brand-name { font-size: var(--text-md); } }
+  .header-actions { display: flex; flex: none; align-items: center; gap: var(--s-3); margin-left: auto; }
 
-  .header-actions { display: flex; align-items: center; gap: var(--s-3); margin-left: auto; }
-  /* On narrow screens the words are hidden visually but still read by screen readers. */
+  /* Phones. These come after the base rules so they win. Hidden words stay readable by screen readers. */
   @media (max-width: 29.99rem) {
+    .utility-link { display: none; }
+    .utility-actions :global(.text-size-label) { display: none; }
+    .brand-name { font-size: var(--text-md); }
     .help-link span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     .help-link { width: var(--tap-sm); padding: 0; }
+  }
+  @media (max-width: 25.99rem) {
+    .menu-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .menu-button { width: var(--tap-sm); padding: 0; }
   }
 
   .menu-button :global(.icon-close) { display: none; }
