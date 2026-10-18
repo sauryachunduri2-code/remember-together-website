@@ -66,10 +66,12 @@ const imageUrl = new URL(image, site.url).href;
       <>
         <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${site.gaId}`}></script>
         <script is:inline define:vars={{ gaId: site.gaId }}>
+          // define:vars wraps this script in its own scope, so gtag must be put on window
+          // for other scripts (like the form events) to reach it.
           window.dataLayer = window.dataLayer || [];
-          function gtag() { dataLayer.push(arguments); }
-          gtag('js', new Date());
-          gtag('config', gaId);
+          window.gtag = function () { window.dataLayer.push(arguments); };
+          window.gtag('js', new Date());
+          window.gtag('config', gaId);
         </script>
       </>
     )}
