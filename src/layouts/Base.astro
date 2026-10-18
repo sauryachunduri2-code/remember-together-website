@@ -76,7 +76,7 @@ const imageUrl = new URL(image, site.url).href;
       </>
     )}
   </head>
-  <body>
+  <body data-count-as={noindex ? '/404/' : undefined}>
     <a class="skip-link" href="#main">Skip to main content</a>
     <Header />
     <main id="main" tabindex="-1">
@@ -84,5 +84,11 @@ const imageUrl = new URL(image, site.url).href;
     </main>
     <p class="print-only">Printed from Remember Together, {site.url.replace('https://', '')}. Free dementia lessons and caregiver guides by HOSA students.</p>
     <Footer />
+
+    <script>
+      import { countVisit } from '../scripts/visits';
+      // Missing pages are counted together as /404/, so mistyped addresses do not fill the sheet.
+      countVisit(document.body.dataset.countAs ?? window.location.pathname.toLowerCase());
+    </script>
   </body>
 </html>

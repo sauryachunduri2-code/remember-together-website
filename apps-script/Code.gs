@@ -55,9 +55,11 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
-  lock.waitLock(10000);
   try {
+    lock.waitLock(10000);
     const data = JSON.parse(e.postData.contents);
+    if (data.form === 'visit') return json(countVisit(data));
+
     const tabName = FORMS[data.form];
     if (!tabName) return json({ ok: false, error: 'Unknown form' });
 
@@ -83,6 +85,54 @@ function doPost(e) {
   } finally {
     lock.releaseLock();
   }
+}
+
+/**
+ * Visit counter. Each page sends { page, newVisit } with no cookies or personal details.
+ * The "Visits" tab keeps one row per day per page:
+ *   Date | Page | Page views | New visits
+ * "New visits" counts browser sessions that started on that page, so adding up a day's
+ * New visits gives the total visits for that day.
+ */
+const VISITS_TAB = 'Visits';
+const PAGE_PATTERN = /^\/[a-z0-9\-\/]{0,120}$/;
+
+function countVisit(data) {
+  const page = String(data.page || '');
+  if (!PAGE_PATTERN.test(page)) return { ok: false, error: 'Bad page' };
+  const isNewVisit = String(data.newVisit) === '1';
+
+  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = spreadsheet.getSheetByName(VISITS_TAB);
+  if (!sheet) {
+    sheet = spreadsheet.insertSheet(VISITS_TAB);
+    // Dates are stored as plain text (2026-10-18) so they never shift with time zones or formats.
+    sheet.getRange('A:A').setNumberFormat('@');
+    sheet.getRange(1, 1, 1, 4).setValues([['Date', 'Page', 'Page views', 'New visits']]).setFontWeight('bold');
+    sheet.setFrozenRows(1);
+  }
+
+  const today = Utilities.formatDate(new Date(), spreadsheet.getSpreadsheetTimeZone(), 'yyyy-MM-dd');
+  const lastRow = sheet.getLastRow();
+
+  // Today's rows are always at the bottom, so only the most recent rows need checking.
+  if (lastRow > 1) {
+    const start = Math.max(2, lastRow - 199);
+    const rows = sheet.getRange(start, 1, lastRow - start + 1, 4).getDisplayValues();
+    for (let i = rows.length - 1; i >= 0; i--) {
+      if (rows[i][0] !== today) break;
+      if (rows[i][1] === page) {
+        const rowNumber = start + i;
+        const views = Number(rows[i][2]) || 0;
+        const visits = Number(rows[i][3]) || 0;
+        sheet.getRange(rowNumber, 3, 1, 2).setValues([[views + 1, visits + (isNewVisit ? 1 : 0)]]);
+        return { ok: true };
+      }
+    }
+  }
+
+  sheet.appendRow([today, page, 1, isNewVisit ? 1 : 0]);
+  return { ok: true };
 }
 
 // Lets you check the deployment in a browser: it should say ok.

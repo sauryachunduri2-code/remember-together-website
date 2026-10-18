@@ -22,6 +22,20 @@ The Sheet makes one tab per form (Contact, Talk requests, Stories, Volunteers, N
 - Open the Web app URL in a browser. It should show `{"ok":true,...}`.
 - Send each form on the live site. You should see a new row in the Sheet, an email to the team, and a reply in the inbox you typed in.
 
+## Visit counter
+
+The same script also counts page views. Each day and page gets one row in the **Visits** tab:
+
+| Date | Page | Page views | New visits |
+|---|---|---|---|
+
+- **Page views**: every time the page was opened.
+- **New visits**: browser sessions that started on that page. Add up a day's New visits to get the total visits that day.
+
+It sends no cookies or personal details, and ad blockers do not block it, so it counts more of your real traffic than Google Analytics. Visits from `localhost` are never counted.
+
+A quick total: in any empty cell, type `=SUM(Visits!D:D)` for all visits ever, or `=SUM(Visits!C:C)` for all page views.
+
 ## Changing the script later
 
 After editing `Code.gs`, use **Deploy > Manage deployments > Edit (pencil) > Version: New version > Deploy**. This keeps the same URL. Creating a brand new deployment gives a new URL that you would have to paste into the site again.
