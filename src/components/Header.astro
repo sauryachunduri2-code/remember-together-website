@@ -1,0 +1,194 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+import Icon from './Icon.astro';
+import TextSize from './TextSize.astro';
+import { nav } from '../site.config';
+
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => path === href || path.startsWith(href);
+---
+<div class="utility-bar">
+  <div class="container utility-inner">
+    <p class="utility-note">A HOSA Community Awareness project</p>
+    <div class="utility-actions">
+      <TextSize />
+      <a class="utility-link" href="/contact/">Contact</a>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="Remember Together, home">
+      <Image src={logo} alt="" width={44} height={44} densities={[1, 2]} loading="eager" class="brand-logo" />
+      <span class="brand-name">Remember Together</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Main">
+      <ul role="list">
+        {nav.map((item) => (
+          <li>
+            <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="button button--help button--small help-link" href="/help/">
+        <Icon name="phone" />
+        <span>Need help now?</span>
+      </a>
+      <button class="button button--secondary button--small menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu">
+        <Icon name="menu" class="icon-open" />
+        <Icon name="close" class="icon-close" />
+        <span class="menu-label">Menu</span>
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-menu" class="nav-mobile" aria-label="Main" hidden>
+    <ul role="list" class="container">
+      {nav.map((item) => (
+        <li>
+          <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+            <span>{item.label}</span>
+            <Icon name="chevron-right" />
+          </a>
+        </li>
+      ))}
+      <li>
+        <a href="/contact/" aria-current={isCurrent('/contact/') ? 'page' : undefined}>
+          <span>Contact</span>
+          <Icon name="chevron-right" />
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('.menu-button');
+  const menu = document.getElementById('mobile-menu');
+  if (button && menu) {
+    const setOpen = (open: boolean) => {
+      button.setAttribute('aria-expanded', String(open));
+      menu.hidden = !open;
+      const label = button.querySelector('.menu-label');
+      if (label) label.textContent = open ? 'Close' : 'Menu';
+    };
+    button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !menu.hidden) {
+        setOpen(false);
+        button.focus();
+      }
+    });
+    // If the window grows into the desktop layout, close the mobile menu.
+    window.addEventListener('resize', () => {
+      if (getComputedStyle(button).display === 'none') setOpen(false);
+    });
+  }
+</script>
+
+<style>
+  .utility-bar {
+    background: var(--feature);
+    color: var(--on-feature);
+  }
+  .utility-inner {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--s-4);
+    min-height: var(--s-7);
+  }
+  .utility-note {
+    display: none;
+    font-size: var(--text-sm); line-height: var(--lh-sm); font-weight: 700;
+  }
+  @media (min-width: 40rem) { .utility-note { display: block; } }
+  .utility-actions { display: flex; align-items: center; gap: var(--s-5); margin-left: auto; }
+  @media (max-width: 29.99rem) {
+    .utility-link { display: none; }
+    .utility-actions :global(.text-size-label) { display: none; }
+  }
+  @media (max-width: 25.99rem) {
+    .menu-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .menu-button { width: var(--tap-sm); padding: 0; }
+  }
+  .utility-link {
+    display: inline-flex; align-items: center; min-height: var(--tap-sm);
+    color: var(--on-feature); font-size: var(--text-sm); font-weight: 700;
+  }
+
+  .site-header {
+    background: var(--paper);
+    border-bottom: var(--border);
+  }
+  .header-inner {
+    display: flex; align-items: center; gap: var(--s-5);
+    min-height: 5rem;
+  }
+  .brand {
+    display: inline-flex; align-items: center; gap: var(--s-3);
+    color: var(--ink); text-decoration: none;
+    min-height: var(--tap-sm);
+  }
+  .brand-logo { width: 2.75rem; height: 2.75rem; }
+  .brand-name {
+    font-family: var(--font-serif); font-weight: 600;
+    font-size: var(--text-lg); line-height: 1.2;
+  }
+  @media (max-width: 26rem) { .brand-name { font-size: var(--text-md); } }
+
+  .header-actions { display: flex; align-items: center; gap: var(--s-3); margin-left: auto; }
+  /* On narrow screens the words are hidden visually but still read by screen readers. */
+  @media (max-width: 29.99rem) {
+    .help-link span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .help-link { width: var(--tap-sm); padding: 0; }
+  }
+
+  .menu-button :global(.icon-close) { display: none; }
+  .menu-button[aria-expanded='true'] :global(.icon-open) { display: none; }
+  .menu-button[aria-expanded='true'] :global(.icon-close) { display: block; }
+
+  /* Desktop navigation. Larger text sizes need more room before the full menu fits. */
+  .nav-desktop { display: none; }
+  .nav-desktop ul { display: flex; gap: var(--s-1); }
+  .nav-desktop a {
+    display: inline-flex; align-items: center;
+    min-height: var(--tap-sm); padding: 0 var(--s-3);
+    border-radius: var(--radius);
+    color: var(--ink); font-weight: 700; text-decoration: none;
+    transition: background-color var(--fast) var(--ease);
+  }
+  .nav-desktop a:hover { background: var(--surface); text-decoration: underline; text-underline-offset: 0.3em; }
+  .nav-desktop a[aria-current='page'] { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 0.45em; text-decoration-color: var(--gold); }
+
+  @media (min-width: 68rem) {
+    :global(html:not([data-text-size])) .nav-desktop { display: block; margin-left: auto; }
+    :global(html:not([data-text-size])) .header-actions { margin-left: 0; }
+    :global(html:not([data-text-size])) .menu-button { display: none; }
+  }
+  @media (min-width: 78rem) {
+    :global(html[data-text-size='2']) .nav-desktop { display: block; margin-left: auto; }
+    :global(html[data-text-size='2']) .header-actions { margin-left: 0; }
+    :global(html[data-text-size='2']) .menu-button { display: none; }
+  }
+  @media (min-width: 88rem) {
+    :global(html[data-text-size='3']) .nav-desktop { display: block; margin-left: auto; }
+    :global(html[data-text-size='3']) .header-actions { margin-left: 0; }
+    :global(html[data-text-size='3']) .menu-button { display: none; }
+  }
+
+  .nav-mobile { border-top: var(--border); background: var(--paper); }
+  .nav-mobile ul { padding-block: var(--s-2) var(--s-4); }
+  .nav-mobile li + li { border-top: var(--border); }
+  .nav-mobile a {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--s-4);
+    min-height: var(--tap);
+    color: var(--ink); font-weight: 700; font-size: var(--text-lg); text-decoration: none;
+  }
+  .nav-mobile a:hover span { text-decoration: underline; }
+  .nav-mobile a[aria-current='page'] span { text-decoration: underline; text-decoration-thickness: 3px; text-decoration-color: var(--gold); text-underline-offset: 0.35em; }
+  .nav-mobile :global(.icon) { width: 1.5rem; height: 1.5rem; color: var(--ink-2); }
+</style>

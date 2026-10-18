@@ -1,0 +1,293 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Form from '../components/Form.astro';
+import Field from '../components/Field.astro';
+import PhoneMock from '../components/PhoneMock.astro';
+import SunMark from '../components/SunMark.astro';
+import { lessons } from '../lib/content';
+import { site } from '../site.config';
+import statsData from '../content/site/stats.json';
+
+const signsLesson = lessons.find((lesson) => lesson.id === 'warning-signs');
+// The lesson pairs each sign with normal aging. Here we only need the short name of each sign.
+const signs = (signsLesson?.sections ?? [])
+  .flatMap((section) => section.bullets ?? [])
+  .map((text) => text.split(/, such as|\. Usual aging|, or /)[0]);
+
+// Drop the official logo into src/assets as hosa-logo.png (or .svg, .jpg, .webp) and it appears here.
+const hosaLogo = Object.values(
+  import.meta.glob<{ default: ImageMetadata }>('../assets/hosa-logo.{png,jpg,svg,webp}', { eager: true }),
+)[0]?.default;
+
+const appSections = [
+  { theme: 'learn', name: 'Learn', text: 'Five short lessons on dementia, with a quick check before and after so you can see what you learned.', href: '/learn/', cta: 'Read the lessons here' },
+  { theme: 'care', name: 'Care', text: 'Step by step guides for hard moments, like evening confusion, wandering and repeated questions.', href: '/caregivers/', cta: 'Read the guides here' },
+  { theme: 'routine', name: 'Routine', text: 'A simple daily checklist, with gentle reminders on your phone if you want them.' },
+  { theme: 'play', name: 'Play', text: 'Seven calm memory games with five levels each. No timers, no scores to chase, and no way to lose.' },
+  { theme: 'help', name: 'Help', text: 'Free helplines and emergency steps, one tap away.', href: '/help/', cta: 'See the helplines' },
+];
+
+const ways = [
+  { href: '/get-involved/#talk', title: 'Invite us to speak', text: 'We give free talks for schools, senior centers, libraries and community groups.' },
+  { href: '/stories/#share', title: 'Share a story', text: 'Tell us about someone you love who lives with dementia. You can stay anonymous.' },
+  { href: '/get-involved/#volunteer', title: 'Help or review our work', text: 'Health professionals, caregivers and community members can help us get it right.' },
+  { href: '/get-involved/#updates', title: 'Get campaign updates', text: 'A short email when the app launches and when we have news.' },
+];
+---
+<Base title="Remember Together: dementia awareness by HOSA students" bareTitle>
+  <!-- Hero: the app comes first -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h1>Dementia lessons, caregiver guides and helplines in one free app.</h1>
+        <p class="lead">Remember Together is an iPhone and iPad app made by high school sophomores in HOSA. It helps families spot the early signs, get through hard caregiving moments, and find help fast.</p>
+        <ul role="list" class="facts">
+          <li><Icon name="check" />Free, with no ads and nothing to buy</li>
+          <li><Icon name="check" />No account. Your information stays on your phone</li>
+          <li><Icon name="check" />Large text and simple screens, made for older eyes</li>
+        </ul>
+
+        <div class="launch card" id="notify">
+          <h2 class="launch-title">Coming soon to the App Store</h2>
+          <p class="muted">Leave your email and we will send one message on launch day.</p>
+          <Form name="app-launch" submitLabel="Notify me" successTitle="You are on the list" successText="We will email you once on launch day. Until then, the lessons and guides are free to read on this site.">
+            <Field name="email" label="Email address" type="email" required autocomplete="email" />
+          </Form>
+        </div>
+        <a class="text-link" href="/learn/">Or start now: read the lessons on this site<Icon name="arrow-right" /></a>
+      </div>
+
+      <div class="hero-visual">
+        <SunMark class="hero-sun" />
+        <PhoneMock />
+      </div>
+    </div>
+  </section>
+
+  <!-- HOSA -->
+  <section class="hosa" aria-labelledby="hosa-title">
+    <div class="container hosa-grid">
+      <div class="hosa-mark">
+        {hosaLogo ? (
+          <span class="hosa-plate"><Image src={hosaLogo} alt="HOSA Future Health Professionals" width={288} densities={[1, 2]} class="hosa-logo" /></span>
+        ) : (
+          <p class="hosa-wordmark"><span>HOSA</span><span class="hosa-sub">Future Health Professionals</span></p>
+        )}
+      </div>
+      <div class="hosa-copy">
+        <h2 id="hosa-title">A HOSA Community Awareness project</h2>
+        <p>HOSA is a national organization for students who plan to work in health care. In its Community Awareness event, students pick a health issue and run a campaign to raise awareness of it where they live.</p>
+        <p>We chose dementia. Almost every family meets it at some point, and most people only start learning about it once someone they love is already sick.</p>
+        <a class="text-link hosa-link" href="/about/">About our campaign<Icon name="arrow-right" /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why it matters -->
+  <section class="section" aria-labelledby="why-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="why-title">Why we chose dementia</h2>
+        <p class="lead">It affects millions of people, and the people caring for them, often with little support.</p>
+      </div>
+      <dl class="stats">
+        {statsData.stats.map((stat) => (
+          <div class="stat">
+            <dt class="stat-figure">{stat.figure}</dt>
+            <dd>
+              <p>{stat.text}</p>
+              <p class="stat-source">{stat.source}</p>
+            </dd>
+          </div>
+        ))}
+      </dl>
+      <p class="text-sm muted stats-sources">
+        Sources:
+        {statsData.sources.map((source, index) => (
+          <>
+            {index > 0 && '; '}
+            <a href={source.url} rel="noopener" target="_blank">{source.name}, {source.title}</a>
+          </>
+        ))}.
+      </p>
+    </div>
+  </section>
+
+  <!-- What's in the app -->
+  <section class="section section--rule" aria-labelledby="app-title">
+    <div class="container app-grid">
+      <div class="app-intro">
+        <h2 id="app-title">What the app does</h2>
+        <p class="lead">Five parts, each with its own color, so it is always clear where you are. The same colors guide you around this site.</p>
+        <p class="muted">Three parts, the lessons, the guides and the helplines, are also free to read here. You do not need the app to use them.</p>
+      </div>
+      <ul role="list" class="app-sections">
+        {appSections.map((part) => (
+          <li class={`tint tint--${part.theme} app-section`}>
+            <h3 class={`app-section-name name--${part.theme}`}>{part.name}</h3>
+            <p>{part.text}</p>
+            {part.href && <a class="text-link" href={part.href}>{part.cta}<Icon name="arrow-right" /></a>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Warning signs -->
+  {signsLesson && (
+    <section class="section section--rule" aria-labelledby="signs-title">
+      <div class="container signs-grid">
+        <div class="signs-intro">
+          <h2 id="signs-title">Know the {signs.length} early signs</h2>
+          <p class="lead">One sign on its own is not a diagnosis. What matters is a pattern of changes that keep happening and get in the way of daily life.</p>
+          <a class="button button--primary" href={`/learn/${signsLesson.id}/`}>See each sign next to normal aging<Icon name="arrow-right" /></a>
+        </div>
+        <ol class="signs">
+          {signs.map((sign) => <li>{sign}</li>)}
+        </ol>
+      </div>
+    </section>
+  )}
+
+  <!-- Get involved -->
+  <section class="section section--rule" aria-labelledby="involved-title">
+    <div class="container involved-grid">
+      <div class="involved-intro">
+        <h2 id="involved-title">Get involved</h2>
+        <p class="lead">Awareness spreads person to person. Here is how you can help it reach more families.</p>
+        <a class="text-link" href={site.instagram.url} rel="noopener" target="_blank"><Icon name="instagram" class="icon--lead" />Follow @{site.instagram.handle}<span class="visually-hidden"> on Instagram (opens in a new tab)</span></a>
+      </div>
+      <ul role="list" class="rows">
+        {ways.map((way) => (
+          <li>
+            <a class="row-link" href={way.href}>
+              <span>
+                <span class="row-title">{way.title}</span>
+                <span class="row-meta">{way.text}</span>
+              </span>
+              <Icon name="chevron-right" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Hero */
+  .hero { padding-block: var(--s-7) var(--section); }
+  .hero-grid { display: grid; gap: var(--s-7); align-items: start; }
+  @media (min-width: 64rem) {
+    .hero { padding-top: var(--s-8); }
+    .hero-grid { grid-template-columns: repeat(12, 1fr); gap: var(--s-6); }
+    .hero-copy { grid-column: span 7; }
+    .hero-visual { grid-column: 8 / span 5; }
+  }
+  .hero-copy > * + * { margin-top: var(--s-5); }
+  .hero-copy h1 { max-width: 18ch; }
+  .hero-copy .lead { max-width: var(--measure); }
+  .facts { display: grid; gap: var(--s-2); }
+  .facts li { display: flex; gap: var(--s-3); align-items: flex-start; font-weight: 700; }
+  .facts :global(.icon) { width: 1.5rem; height: 1.5rem; flex: none; color: var(--teal); margin-top: 0.125rem; }
+  .launch { max-width: 32rem; }
+  .launch > * + * { margin-top: var(--s-2); }
+  .launch :global(.rt-form) { margin-top: var(--s-5); }
+  .launch :global(.form-actions) { margin-top: var(--s-4); }
+  .launch-title { font-size: var(--text-xl); line-height: var(--lh-xl); }
+
+  .hero-visual {
+    position: relative;
+    display: grid; justify-items: center;
+    padding: var(--s-9) var(--s-5) 0;
+    border-radius: var(--radius);
+    background: var(--home-tint);
+    overflow: hidden;
+  }
+  :global(.hero-sun) { position: absolute; top: var(--s-5); width: 8rem; color: var(--gold); }
+  .hero-visual :global(.phone) { position: relative; margin-bottom: calc(-1 * var(--s-8)); }
+
+  /* HOSA */
+  .hosa { background: var(--feature); color: var(--on-feature); padding-block: var(--s-8); }
+  @media (min-width: 64rem) { .hosa { padding-block: var(--s-9); } }
+  .hosa-grid { display: grid; gap: var(--s-6); align-items: center; }
+  @media (min-width: 56rem) {
+    .hosa-grid { grid-template-columns: repeat(12, 1fr); }
+    .hosa-mark { grid-column: span 4; }
+    .hosa-copy { grid-column: 6 / span 7; }
+  }
+  .hosa h2 { color: var(--on-feature); }
+  .hosa-copy > * + * { margin-top: var(--s-4); }
+  .hosa-copy p { max-width: var(--measure); }
+  .hosa-wordmark { display: grid; gap: var(--s-1); }
+  .hosa-wordmark span:first-child { font-family: var(--font-sans); font-weight: 700; font-size: var(--text-3xl); line-height: 1; letter-spacing: 0.04em; }
+  .hosa-sub { font-weight: 700; color: var(--on-feature-2); }
+  /* The official logo has a white background, so it sits on a white plate, as brand logos usually do. */
+  .hosa-plate { display: inline-block; padding: var(--s-4) var(--s-5); background: #fff; border-radius: var(--radius); }
+  .hosa-logo { display: block; width: 18rem; max-width: 100%; height: auto; }
+  .hosa-link { color: var(--on-feature); }
+  .hosa-link:focus-visible { outline-color: var(--gold); }
+
+  /* Stats */
+  .stats { display: grid; border-top: var(--border); }
+  @media (min-width: 48rem) { .stats { grid-template-columns: 1fr 1fr; column-gap: var(--s-6); } }
+  .stat { display: grid; align-content: start; gap: var(--s-2); padding-block: var(--s-6); border-bottom: var(--border); }
+  .stat-figure { font-family: var(--font-serif); font-weight: 600; font-size: var(--text-2xl); line-height: var(--lh-2xl); color: var(--ink); }
+  .stat dd > * + * { margin-top: var(--s-2); }
+  .stat dd p:first-child { font-size: var(--text-lg); line-height: var(--lh-lg); }
+  .stat-source { font-size: var(--text-sm); line-height: var(--lh-sm); color: var(--ink-2); }
+  .stats-sources { margin-top: var(--s-5); max-width: var(--measure); }
+
+  /* App sections */
+  .app-grid { display: grid; gap: var(--s-7); }
+  @media (min-width: 64rem) {
+    .app-grid { grid-template-columns: repeat(12, 1fr); gap: var(--s-6); }
+    .app-intro { grid-column: span 5; }
+    .app-sections { grid-column: 7 / span 6; }
+  }
+  .app-intro > * + * { margin-top: var(--s-4); }
+  .app-sections { display: grid; gap: var(--s-3); }
+  .app-section > * + * { margin-top: var(--s-2); }
+  .app-section-name { font-size: var(--text-xl); line-height: var(--lh-xl); }
+  .name--learn { color: var(--learn-strong); }
+  .name--care { color: var(--care-strong); }
+  .name--routine { color: var(--routine-strong); }
+  .name--play { color: var(--play-strong); }
+  .name--help { color: var(--help-strong); }
+  .app-section .text-link { color: var(--ink); }
+
+  /* Signs */
+  .signs-grid { display: grid; gap: var(--s-7); }
+  @media (min-width: 64rem) {
+    .signs-grid { grid-template-columns: repeat(12, 1fr); gap: var(--s-6); }
+    .signs-intro { grid-column: span 5; }
+    .signs { grid-column: 7 / span 6; }
+  }
+  .signs-intro > * + * { margin-top: var(--s-5); }
+  .signs-intro .button { white-space: normal; text-align: left; padding-block: var(--s-3); }
+  .signs { list-style: none; padding: 0; counter-reset: sign; border-top: var(--border); }
+  .signs li {
+    counter-increment: sign;
+    display: flex; gap: var(--s-4); align-items: baseline;
+    padding-block: var(--s-4);
+    border-bottom: var(--border);
+    font-size: var(--text-lg); line-height: var(--lh-lg);
+  }
+  .signs li::before {
+    content: counter(sign, decimal-leading-zero);
+    flex: none; width: var(--s-6);
+    font-family: var(--font-serif); font-weight: 600; font-size: var(--text-md);
+    color: var(--learn-strong);
+  }
+
+  /* Involved */
+  .involved-grid { display: grid; gap: var(--s-7); }
+  @media (min-width: 64rem) {
+    .involved-grid { grid-template-columns: repeat(12, 1fr); gap: var(--s-6); }
+    .involved-intro { grid-column: span 5; }
+    .involved-grid .rows { grid-column: 7 / span 6; }
+  }
+  .involved-intro > * + * { margin-top: var(--s-4); }
+</style>

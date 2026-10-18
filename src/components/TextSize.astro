@@ -1,0 +1,56 @@
+---
+// Lets visitors make every word on the site bigger. The choice is remembered on their device.
+const sizes = [
+  { value: '1', label: 'A', name: 'Normal text' },
+  { value: '2', label: 'A+', name: 'Larger text' },
+  { value: '3', label: 'A++', name: 'Largest text' },
+];
+---
+<div class="text-size" role="group" aria-label="Text size">
+  <span class="text-size-label" aria-hidden="true">Text size</span>
+  {sizes.map((size) => (
+    <button type="button" class="size-option" data-size={size.value} aria-pressed={size.value === '1' ? 'true' : 'false'}>
+      <span class={`size-glyph size-glyph--${size.value}`}>{size.label}</span><span class="visually-hidden">, {size.name.toLowerCase()}</span>
+    </button>
+  ))}
+</div>
+
+<script>
+  const root = document.documentElement;
+  const options = document.querySelectorAll<HTMLButtonElement>('.size-option');
+
+  const apply = (value: string) => {
+    if (value === '1') delete root.dataset.textSize;
+    else root.dataset.textSize = value;
+    options.forEach((option) => option.setAttribute('aria-pressed', String(option.dataset.size === value)));
+    try { localStorage.setItem('rt-text-size', value); } catch {}
+  };
+
+  apply(root.dataset.textSize ?? '1');
+  options.forEach((option) => option.addEventListener('click', () => apply(option.dataset.size ?? '1')));
+</script>
+
+<style>
+  .text-size { display: flex; align-items: center; gap: var(--s-1); }
+  .text-size-label {
+    margin-right: var(--s-2);
+    font-size: var(--text-sm); line-height: var(--lh-sm); font-weight: 700;
+  }
+  .size-option {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: var(--tap-sm); height: var(--tap-sm);
+    padding: 0 var(--s-2);
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--on-feature);
+    font-weight: 700; line-height: 1;
+    transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease);
+  }
+  .size-option:hover { border-color: var(--on-feature-2); }
+  .size-option[aria-pressed='true'] { background: var(--on-feature); color: var(--feature); }
+  .size-option:focus-visible { outline-color: var(--gold); }
+  .size-glyph--1 { font-size: var(--text-sm); }
+  .size-glyph--2 { font-size: var(--text-md); }
+  .size-glyph--3 { font-size: var(--text-lg); }
+</style>

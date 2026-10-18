@@ -1,0 +1,8 @@
+---
+// The rising sun from the logo, drawn the same way as the app's SunMark.
+interface Props { class?: string }
+const { class: className } = Astro.props;
+---
+<svg class:list={['sun-mark', className]} viewBox="0 0 160 104" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" aria-hidden="true" focusable="false">
+  <path d="M38.4 100A41.6 41.6 0 0 1 121.6 100M22.6 81.4L4.8 75.6M44.5 51.2L33.5 36.1M80 39.7L80 8.5M115.5 51.2L126.5 36.1M137.4 81.4L155.2 75.6" />
+</svg>

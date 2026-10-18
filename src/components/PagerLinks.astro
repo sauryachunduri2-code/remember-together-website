@@ -1,0 +1,41 @@
+---
+// Previous / next links at the end of a lesson or guide.
+import Icon from './Icon.astro';
+interface Link { href: string; title: string }
+interface Props { prev?: Link; next?: Link; prevLabel: string; nextLabel: string }
+const { prev, next, prevLabel, nextLabel } = Astro.props;
+---
+<nav class="pager no-print" aria-label="More pages">
+  {prev ? (
+    <a class="pager-link" href={prev.href}>
+      <span class="pager-label"><Icon name="arrow-left" />{prevLabel}</span>
+      <span class="pager-title">{prev.title}</span>
+    </a>
+  ) : <span />}
+  {next && (
+    <a class="pager-link pager-link--next" href={next.href}>
+      <span class="pager-label">{nextLabel}<Icon name="arrow-right" /></span>
+      <span class="pager-title">{next.title}</span>
+    </a>
+  )}
+</nav>
+
+<style>
+  .pager { display: grid; gap: var(--s-4); }
+  @media (min-width: 40rem) { .pager { grid-template-columns: 1fr 1fr; } }
+  .pager-link {
+    display: grid; gap: var(--s-1);
+    min-height: var(--tap);
+    padding: var(--s-5);
+    background: var(--surface); border: var(--border); border-radius: var(--radius);
+    color: var(--ink); text-decoration: none;
+    transition: border-color var(--fast) var(--ease);
+  }
+  .pager-link:hover { border-color: var(--ink-2); }
+  .pager-link:hover .pager-title { text-decoration: underline; text-underline-offset: 0.2em; }
+  .pager-link:active { background: var(--paper); }
+  .pager-link--next { text-align: right; justify-items: end; }
+  .pager-label { display: inline-flex; align-items: center; gap: var(--s-2); font-size: var(--text-sm); line-height: var(--lh-sm); font-weight: 700; color: var(--ink-2); }
+  .pager-label :global(.icon) { width: 1.125rem; height: 1.125rem; }
+  .pager-title { font-family: var(--font-serif); font-weight: 600; font-size: var(--text-xl); line-height: var(--lh-xl); }
+</style>

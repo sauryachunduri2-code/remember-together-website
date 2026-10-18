@@ -1,0 +1,27 @@
+---
+// The colored header band at the top of each page. The color tells people which part of
+// the site they are in, matching the app's tabs. The title always says it too.
+interface Props {
+  theme: 'home' | 'learn' | 'care' | 'help' | 'play' | 'routine' | 'plain';
+  title: string;
+  intro?: string;
+  crumb?: { href: string; label: string };
+}
+const { theme, title, intro, crumb } = Astro.props;
+---
+<header class={`band band--${theme}`}>
+  <div class="container">
+    <div class="band-inner">
+      {crumb && (
+        <p class="breadcrumb no-print no-listen"><a href={crumb.href}>{crumb.label}</a></p>
+      )}
+      <h1>{title}</h1>
+      {intro && <p class="lead band-intro">{intro}</p>}
+      <slot />
+    </div>
+  </div>
+</header>
+
+<style>
+  .band-intro { color: var(--ink); }
+</style>

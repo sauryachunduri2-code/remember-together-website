@@ -1,0 +1,15 @@
+{
+  "note": "Things the campaign has made or done. Add real numbers (talks given, people reached, downloads) as they happen.",
+  "made": [
+    { "figure": "5", "label": "lessons on dementia, with a 17 question check before and after" },
+    { "figure": "5", "label": "step by step caregiver guides" },
+    { "figure": "7", "label": "calm memory games, each with five levels" },
+    { "figure": "1", "label": "free app for iPhone and iPad, launching soon" }
+  ],
+  "measures": [
+    "How much people learn, using the app's before and after check. Scores stay anonymous.",
+    "How many people use each part of the app, counted without names or personal details.",
+    "Visits to this website and messages through its forms.",
+    "Talks we give and the number of people who attend."
+  ]
+}

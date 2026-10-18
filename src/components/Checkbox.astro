@@ -1,0 +1,17 @@
+---
+// A single yes or no checkbox. Unchecked boxes are sent as "No", so the sheet always has an answer.
+interface Props {
+  name: string;
+  required?: boolean;
+  error?: string;
+}
+const { name, required = false, error = 'Please check this box to continue.' } = Astro.props;
+const id = `${name}-${Math.random().toString(36).slice(2, 7)}`;
+---
+<div class="field">
+  <label class="choice" for={id}>
+    <input type="checkbox" id={id} name={name} value="Yes" required={required} aria-describedby={`${id}-error`} data-error={error} />
+    <span><slot /></span>
+  </label>
+  <p class="field-error" id={`${id}-error`} hidden></p>
+</div>

@@ -1,0 +1,141 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+import Icon from './Icon.astro';
+import { site } from '../site.config';
+
+const year = new Date().getFullYear();
+const columns = [
+  {
+    title: 'Learn',
+    links: [
+      { href: '/learn/', label: 'Lessons' },
+      { href: '/caregivers/', label: 'Caregiver guides' },
+      { href: '/resources/', label: 'Resources' },
+      { href: '/help/', label: 'Helplines' },
+    ],
+  },
+  {
+    title: 'Take part',
+    links: [
+      { href: '/get-involved/#talk', label: 'Request a talk' },
+      { href: '/stories/#share', label: 'Share a story' },
+      { href: '/get-involved/#volunteer', label: 'Volunteer' },
+      { href: '/get-involved/#updates', label: 'Get updates' },
+    ],
+  },
+  {
+    title: 'About',
+    links: [
+      { href: '/about/', label: 'Our campaign' },
+      { href: '/contact/', label: 'Contact us' },
+      { href: '/privacy/', label: 'Privacy' },
+    ],
+  },
+];
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="footer-logo" href="/" aria-label="Remember Together, home">
+          <Image src={logo} alt="" width={56} height={56} densities={[1, 2]} />
+          <span>Remember Together</span>
+        </a>
+        <p class="muted">Dementia awareness by high school students, for families and the people who care for them. A HOSA Community Awareness project.</p>
+        <ul role="list" class="footer-contact">
+          <li>
+            <a href={`mailto:${site.email}`}><Icon name="mail" /><span>{site.email}</span></a>
+          </li>
+          <li>
+            <a href={site.instagram.url} rel="me noopener" target="_blank"><Icon name="instagram" /><span>@{site.instagram.handle}</span><span class="visually-hidden"> (opens Instagram in a new tab)</span></a>
+          </li>
+        </ul>
+      </div>
+
+      {columns.map((column) => (
+        <nav class="footer-col" aria-label={column.title}>
+          <h2 class="footer-title">{column.title}</h2>
+          <ul role="list">
+            {column.links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+          </ul>
+        </nav>
+      ))}
+    </div>
+
+    <div class="footer-notice">
+      <p><strong>Not medical advice.</strong> Remember Together shares general information from trusted health organizations. It does not diagnose or treat anyone. Talk to a doctor about any health concern. In an emergency, call 911.</p>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {year} Remember Together</p>
+      <p>Facts on this site come from the Alzheimer&rsquo;s Association, the National Institute on Aging, the CDC and the World Health Organization. Each page lists its sources.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--section);
+    background: var(--surface);
+    border-top: var(--border);
+    padding-block: var(--s-8) var(--s-6);
+  }
+  .footer-grid { display: grid; gap: var(--s-7); }
+  @media (min-width: 48rem) {
+    .footer-grid { grid-template-columns: repeat(3, 1fr); }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+  @media (min-width: 64rem) {
+    .footer-grid { grid-template-columns: 5fr 2fr 2fr 2fr; gap: var(--s-6); }
+    .footer-brand { grid-column: auto; padding-right: var(--s-7); }
+  }
+  .footer-brand > * + * { margin-top: var(--s-4); }
+  .footer-logo {
+    display: inline-flex; align-items: center; gap: var(--s-3);
+    color: var(--ink); text-decoration: none;
+    font-family: var(--font-serif); font-weight: 600; font-size: var(--text-xl); line-height: var(--lh-xl);
+  }
+  .footer-logo img { width: 3.5rem; height: 3.5rem; }
+  .footer-contact { display: grid; gap: var(--s-1); }
+  .footer-contact a {
+    display: inline-flex; align-items: center; gap: var(--s-3);
+    min-height: var(--tap-sm);
+    color: var(--ink); font-weight: 700; text-decoration: none;
+  }
+  .footer-contact a:hover span:first-of-type { text-decoration: underline; }
+  .footer-contact span { min-width: 0; overflow-wrap: anywhere; }
+  .footer-contact :global(.icon) { width: 1.375rem; height: 1.375rem; flex: none; color: var(--ink-2); }
+
+  .footer-title {
+    font-family: var(--font-sans); font-size: var(--text-sm); line-height: var(--lh-sm); font-weight: 700;
+    color: var(--ink-2); letter-spacing: 0.04em; text-transform: uppercase;
+    margin-bottom: var(--s-3);
+  }
+  .footer-col a {
+    display: inline-flex; align-items: center; min-height: var(--tap-sm);
+    color: var(--ink); text-decoration: none;
+  }
+  .footer-col a:hover { text-decoration: underline; }
+
+  .footer-notice {
+    margin-top: var(--s-7);
+    padding: var(--s-5);
+    border-radius: var(--radius);
+    background: var(--paper);
+    border: var(--border);
+    max-width: none;
+  }
+  .footer-notice p { max-width: 56rem; }
+
+  .footer-bottom {
+    display: grid; gap: var(--s-2);
+    margin-top: var(--s-6); padding-top: var(--s-5);
+    border-top: var(--border);
+    font-size: var(--text-sm); line-height: var(--lh-sm); color: var(--ink-2);
+  }
+  @media (min-width: 64rem) {
+    .footer-bottom { grid-template-columns: auto 1fr; gap: var(--s-6); }
+    .footer-bottom p:last-child { text-align: right; }
+  }
+</style>

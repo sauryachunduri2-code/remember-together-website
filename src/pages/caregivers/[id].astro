@@ -1,0 +1,142 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageBand from '../../components/PageBand.astro';
+import ListenButton from '../../components/ListenButton.astro';
+import PrintButton from '../../components/PrintButton.astro';
+import Disclaimer from '../../components/Disclaimer.astro';
+import SourceList from '../../components/SourceList.astro';
+import PagerLinks from '../../components/PagerLinks.astro';
+import Icon from '../../components/Icon.astro';
+import { guides, careLastChecked, type Guide } from '../../lib/content';
+
+export function getStaticPaths() {
+  return guides.map((guide, index) => ({ params: { id: guide.id }, props: { guide, index } }));
+}
+
+interface Props { guide: Guide; index: number }
+const { guide, index } = Astro.props;
+const prev = guides[index - 1];
+const next = guides[index + 1];
+---
+<Base title={guide.title} description={`${guide.summary}. A step by step caregiver guide from Remember Together, based on the National Institute on Aging and the Alzheimer's Association.`}>
+  <div data-listen-root>
+    <PageBand theme="care" title={guide.title} intro={guide.summary + '.'} crumb={{ href: '/caregivers/', label: 'All caregiver guides' }}>
+      <div class="band-actions no-print">
+        <ListenButton />
+        <PrintButton />
+      </div>
+    </PageBand>
+
+    <div class="section">
+      <div class="container guide-layout">
+        <article class="guide-body">
+          {guide.urgent && (
+            <div class="callout callout--urgent urgent" role="note">
+              <p class="callout-title">{guide.urgent.title}</p>
+              <p>{guide.urgent.text}</p>
+              <p class="no-listen no-print">
+                <a class="button button--help" href="tel:911"><Icon name="phone" />Call 911</a>
+              </p>
+            </div>
+          )}
+
+          {guide.sections.map((section) => {
+            if (section.style === 'help') {
+              return (
+                <section class="callout callout--note">
+                  <h2 class="callout-title">{section.heading}</h2>
+                  {section.items.map((item) => <p>{item}</p>)}
+                  <p class="no-listen"><a href="/help/">Helplines you can call for free</a></p>
+                </section>
+              );
+            }
+            if (section.style === 'avoid') {
+              return (
+                <section class="callout">
+                  <h2 class="callout-title">{section.heading}</h2>
+                  <ul class="plain-list">{section.items.map((item) => <li>{item}</li>)}</ul>
+                </section>
+              );
+            }
+            return (
+              <section class="prose">
+                <h2>{section.heading}</h2>
+                {section.style === 'text' && section.items.map((item) => <p>{item}</p>)}
+                {section.style === 'bullets' && <ul>{section.items.map((item) => <li>{item}</li>)}</ul>}
+                {section.style === 'steps' && (
+                  <ol role="list" class="steps">
+                    {section.items.map((item, step) => (
+                      <li><span class="step-number" aria-hidden="true">{step + 1}</span><span><span class="visually-hidden">Step {step + 1}. </span>{item}</span></li>
+                    ))}
+                  </ol>
+                )}
+              </section>
+            );
+          })}
+        </article>
+
+        <aside class="guide-aside no-print no-listen" aria-label="More help">
+          <div class="tint tint--help stack">
+            <h2 class="aside-title">Talk to someone now</h2>
+            <p>The Alzheimer&rsquo;s Association Helpline is free and open day and night.</p>
+            <a class="button button--help button--block" href="tel:18002723900"><Icon name="phone" />Call 1-800-272-3900</a>
+          </div>
+          <nav class="other-guides" aria-labelledby="other-guides-title">
+            <h2 id="other-guides-title" class="aside-title">Other guides</h2>
+            <ul role="list" class="rows">
+              {guides.filter((other) => other.id !== guide.id).map((other) => (
+                <li><a class="row-link" href={`/caregivers/${other.id}/`}><span class="other-title">{other.title}</span><Icon name="chevron-right" /></a></li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="guide-footer">
+      <Disclaimer />
+      <SourceList sources={guide.sources} checked={careLastChecked} />
+      <PagerLinks
+        prevLabel="Previous guide"
+        nextLabel={next ? 'Next guide' : 'Next'}
+        prev={prev && { href: `/caregivers/${prev.id}/`, title: prev.title }}
+        next={next ? { href: `/caregivers/${next.id}/`, title: next.title } : { href: '/help/', title: 'Helplines' }}
+      />
+    </div>
+  </div>
+</Base>
+
+<style>
+  .band-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); padding-top: var(--s-2); }
+
+  .guide-layout { display: grid; gap: var(--s-8); }
+  @media (min-width: 64rem) {
+    .guide-layout { grid-template-columns: repeat(12, 1fr); gap: var(--s-6); }
+    .guide-body { grid-column: span 7; }
+    .guide-aside { grid-column: 9 / span 4; align-self: start; position: sticky; top: var(--s-6); }
+  }
+  .guide-body { display: grid; gap: var(--s-7); max-width: var(--measure); align-content: start; }
+  .guide-aside { display: grid; gap: var(--s-6); }
+  .aside-title { font-size: var(--text-xl); line-height: var(--lh-xl); }
+  .other-guides .aside-title { margin-bottom: var(--s-3); }
+  .other-guides .row-link { padding-block: var(--s-3); }
+  .other-title { font-weight: 700; }
+  .urgent .button { margin-top: var(--s-2); }
+
+  .steps { padding: 0; display: grid; gap: var(--s-4); }
+  .prose .steps li + li { margin-top: 0; }
+  .steps li { display: flex; gap: var(--s-4); align-items: flex-start; }
+  .step-number {
+    display: inline-flex; align-items: center; justify-content: center; flex: none;
+    width: var(--s-6); height: var(--s-6);
+    border-radius: 50%;
+    background: var(--care-strong); color: var(--care-tint);
+    font-weight: 700; font-size: var(--text-sm); line-height: 1;
+  }
+  .plain-list { padding-left: var(--s-5); }
+  .plain-list li + li { margin-top: var(--s-2); }
+
+  .guide-footer { display: grid; gap: var(--s-7); max-width: var(--measure); }
+</style>

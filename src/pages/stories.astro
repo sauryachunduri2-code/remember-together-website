@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import PageBand from '../components/PageBand.astro';
+import Form from '../components/Form.astro';
+import Field from '../components/Field.astro';
+import Checkbox from '../components/Checkbox.astro';
+import Icon from '../components/Icon.astro';
+import data from '../content/site/stories.json';
+
+interface Story { name: string | null; relationship: string; text: string; date: string }
+const stories = data.stories as Story[];
+---
+<Base
+  title="Stories"
+  description="Real stories from families and friends of people living with dementia, shared with permission. Share yours, with your name or anonymously."
+>
+  <PageBand theme="plain" title="Stories" intro="Dementia can feel lonely for the people around it. Stories remind us that many families are living the same thing.">
+    <p class="no-print"><a class="button button--primary" href="#share">Share your story<Icon name="arrow-right" /></a></p>
+  </PageBand>
+
+  <section class="section" aria-labelledby="published-title">
+    <div class="container">
+      <h2 id="published-title" class="visually-hidden">Published stories</h2>
+      {stories.length > 0 ? (
+        <ul role="list" class="story-list">
+          {stories.map((story) => (
+            <li class="card story">
+              <blockquote>
+                {story.text.split('\n\n').map((paragraph) => <p>{paragraph}</p>)}
+              </blockquote>
+              <p class="story-by"><strong>{story.name ?? 'Anonymous'}</strong>, {story.relationship}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="empty">
+          <h3>No stories are published yet</h3>
+          <p>We only post a story when the person who wrote it gives permission, and after our team has read it. Yours could be the first.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section id="share" class="section section--rule" aria-labelledby="share-title">
+    <div class="container grid-2">
+      <div class="share-intro">
+        <h2 id="share-title">Share your story</h2>
+        <p class="lead">Tell us about someone you love who lives with dementia, or about caring for them. Short or long is fine.</p>
+        <h3 class="share-sub">How we handle stories</h3>
+        <ul>
+          <li>You choose whether we can publish it. If you say no, only our team will read it.</li>
+          <li>You can share it with your first name or stay anonymous.</li>
+          <li>We read every story before anything is posted, and we never publish your email.</li>
+          <li>Please leave out full names, addresses and other private details about the person you are writing about.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <Form name="story" submitLabel="Send my story" successTitle="Thank you for sharing" successText="Your story reached our team. If you said we may publish it, we will read it first and email you if we have a question.">
+          <Field name="story" label="Your story" type="textarea" rows={10} required maxlength={5000} error="Please write your story before sending." />
+          <Checkbox name="anonymous">Share without my name</Checkbox>
+          <div data-hide-when="anonymous">
+            <Field name="firstName" label="Your first name" autocomplete="given-name" hint="Shown with your story if it is published." />
+          </div>
+          <Field name="relationship" label="How do you know them?" hint="For example: grandchild, daughter, friend, neighbor." />
+          <Field name="email" label="Email address" type="email" autocomplete="email" hint="Only so we can reply. Never published." />
+          <fieldset class="field consent">
+            <legend class="visually-hidden">Permission</legend>
+            <div class="choices">
+              <Checkbox name="mayPublish">You may publish my story on this website</Checkbox>
+              <Checkbox name="age13" required error="Please confirm you are 13 or older. If you are younger, ask a parent to share it with you.">I am 13 or older</Checkbox>
+            </div>
+          </fieldset>
+        </Form>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .story-list { display: grid; gap: var(--s-5); }
+  @media (min-width: 56rem) { .story-list { grid-template-columns: 1fr 1fr; } }
+  .story > * + * { margin-top: var(--s-4); }
+  .story blockquote { font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--lh-lg); }
+  .story blockquote > * + * { margin-top: var(--s-3); }
+
+  .empty { max-width: var(--measure); padding: var(--s-6); border: var(--border); border-radius: var(--radius); background: var(--surface); }
+  .empty > * + * { margin-top: var(--s-3); }
+
+  .share-intro > * + * { margin-top: var(--s-4); }
+  .share-intro .share-sub { margin-top: var(--s-6); font-size: var(--text-xl); }
+  .share-intro ul { padding-left: var(--s-5); }
+  .share-intro li + li { margin-top: var(--s-3); }
+  [data-hide-when][hidden] { display: none; }
+  .consent { margin-top: var(--s-5); padding-top: var(--s-5); border-top: var(--border); }
+  @media (min-width: 56rem) {
+    .share-intro { position: sticky; top: var(--s-6); align-self: start; }
+  }
+</style>

@@ -1,0 +1,13 @@
+---
+import Icon from './Icon.astro';
+---
+<button type="button" class="button button--secondary button--small no-print" data-print>
+  <Icon name="printer" />
+  <span>Print</span>
+</button>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-print]').forEach((button) => {
+    button.addEventListener('click', () => window.print());
+  });
+</script>

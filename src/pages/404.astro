@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+---
+<Base title="Page not found" noindex>
+  <section class="section">
+    <div class="container">
+    <div class="not-found">
+      <h1>We could not find that page</h1>
+      <p class="lead">The link may be old, or the address may have a typo. These are the pages people look for most.</p>
+      <ul role="list" class="rows">
+        <li><a class="row-link" href="/"><span class="row-title">Home</span><Icon name="chevron-right" /></a></li>
+        <li><a class="row-link" href="/learn/"><span class="row-title">Lessons about dementia</span><Icon name="chevron-right" /></a></li>
+        <li><a class="row-link" href="/caregivers/"><span class="row-title">Caregiver guides</span><Icon name="chevron-right" /></a></li>
+        <li><a class="row-link" href="/help/"><span class="row-title">Helplines</span><Icon name="chevron-right" /></a></li>
+      </ul>
+    </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .not-found { max-width: var(--measure); }
+  .not-found > * + * { margin-top: var(--s-5); }
+</style>

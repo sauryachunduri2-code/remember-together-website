@@ -1,0 +1,29 @@
+{
+  "note": "Same numbers as the app's Help tab (Features/Help/HelpView.swift). Verify each against the organization's own site before every release.",
+  "helplines": [
+    {
+      "name": "Alzheimer's Association Helpline",
+      "detail": "Free support and information, any time of day or night.",
+      "display": "1-800-272-3900",
+      "dial": "18002723900"
+    },
+    {
+      "name": "Eldercare Locator",
+      "detail": "Finds local services for older adults and their families.",
+      "display": "1-800-677-1116",
+      "dial": "18006771116"
+    },
+    {
+      "name": "988 Suicide and Crisis Lifeline",
+      "detail": "Call or text 988 if you or someone else is in crisis.",
+      "display": "988",
+      "dial": "988"
+    },
+    {
+      "name": "Poison Help",
+      "detail": "If someone has taken the wrong medicine or the wrong amount.",
+      "display": "1-800-222-1222",
+      "dial": "18002221222"
+    }
+  ]
+}

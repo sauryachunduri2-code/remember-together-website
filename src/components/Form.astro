@@ -1,0 +1,79 @@
+---
+// Shared form shell. Every form on the site sends to the same Google Apps Script, which
+// saves a row in the team's Google Sheet, emails the team and sends the visitor a short reply.
+import Icon from './Icon.astro';
+import { site } from '../site.config';
+
+interface Props {
+  /** Becomes the Sheet tab name, so keep it short and stable. */
+  name: string;
+  submitLabel: string;
+  successTitle: string;
+  successText: string;
+  class?: string;
+}
+const { name, submitLabel, successTitle, successText, class: className } = Astro.props;
+---
+<div class:list={['rt-form', className]} data-rt-form-wrap>
+  <form data-rt-form={name} data-endpoint={site.formEndpoint} data-email={site.email} novalidate>
+    <slot />
+    <div class="form-error" role="alert" hidden>
+      <Icon name="alert" />
+      <p class="form-error-text"></p>
+    </div>
+    <div class="form-actions">
+      <button class="button button--primary" type="submit">
+        <span class="spinner" aria-hidden="true"></span>
+        <span class="submit-label" data-label={submitLabel}>{submitLabel}</span>
+      </button>
+    </div>
+  </form>
+
+  <div class="form-success" role="status" tabindex="-1" hidden>
+    <span class="success-mark"><Icon name="check" /></span>
+    <div class="success-body">
+      <p class="success-title">{successTitle}</p>
+      <p>{successText}</p>
+      <button class="text-link form-reset" type="button">Send another</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { initForms } from '../scripts/forms';
+  initForms();
+</script>
+
+<style>
+  .form-actions { margin-top: var(--s-6); }
+  .form-error {
+    display: flex; gap: var(--s-3); align-items: flex-start;
+    margin-top: var(--s-5);
+    padding: var(--s-4);
+    border-radius: var(--radius);
+    background: var(--help-tint);
+    color: var(--ink);
+  }
+  .form-error[hidden] { display: none; }
+  .form-error :global(.icon) { width: 1.5rem; height: 1.5rem; flex: none; color: var(--help-strong); }
+  .form-success {
+    display: flex; gap: var(--s-4); align-items: flex-start;
+    padding: var(--s-5);
+    border-radius: var(--radius);
+    background: var(--care-tint);
+    outline: none;
+  }
+  .form-success[hidden] { display: none; }
+  .form-success:not([hidden]) { animation: settle var(--base) var(--ease); }
+  .success-mark {
+    display: inline-flex; align-items: center; justify-content: center; flex: none;
+    width: var(--s-7); height: var(--s-7);
+    border-radius: 50%;
+    background: var(--care-strong); color: var(--care-tint);
+  }
+  .success-mark :global(.icon) { width: 1.5rem; height: 1.5rem; }
+  .success-body > * + * { margin-top: var(--s-2); }
+  .success-title { font-family: var(--font-serif); font-weight: 600; font-size: var(--text-xl); line-height: var(--lh-xl); }
+  .form-reset { padding-inline: 0; border: 0; background: none; }
+  @keyframes settle { from { opacity: 0; } to { opacity: 1; } }
+</style>

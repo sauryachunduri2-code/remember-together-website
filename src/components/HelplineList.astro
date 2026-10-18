@@ -1,0 +1,36 @@
+---
+// Free helplines, each one a tap-to-call row. Numbers live in src/content/site/helplines.json.
+import Icon from './Icon.astro';
+import data from '../content/site/helplines.json';
+---
+<ul role="list" class="rows helplines">
+  {data.helplines.map((line) => (
+    <li>
+      <a class="row-link helpline" href={`tel:${line.dial}`}>
+        <span>
+          <span class="helpline-name">{line.name}</span>
+          <span class="row-meta">{line.detail}</span>
+          <span class="helpline-number">{line.display}</span>
+        </span>
+        <span class="call-mark" aria-hidden="true"><Icon name="phone" /></span>
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .helpline-name { display: block; font-weight: 700; font-size: var(--text-lg); line-height: var(--lh-lg); }
+  .helpline-number {
+    display: block; margin-top: var(--s-2);
+    font-family: var(--font-serif); font-weight: 600; font-size: var(--text-xl); line-height: var(--lh-xl);
+    color: var(--care-strong);
+  }
+  .call-mark {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: var(--tap); height: var(--tap);
+    border-radius: 50%;
+    background: var(--care-tint); color: var(--care-strong);
+  }
+  .call-mark :global(.icon) { width: 1.5rem; height: 1.5rem; }
+  .helpline:hover .helpline-name { text-decoration: underline; text-underline-offset: 0.2em; }
+</style>

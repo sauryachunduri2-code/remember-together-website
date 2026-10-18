@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import PageBand from '../components/PageBand.astro';
+import Form from '../components/Form.astro';
+import Field from '../components/Field.astro';
+import Checkbox from '../components/Checkbox.astro';
+
+const sections = [
+  { id: 'talk', label: 'Request a talk' },
+  { id: 'volunteer', label: 'Volunteer or review' },
+  { id: 'updates', label: 'Get updates' },
+];
+---
+<Base
+  title="Get involved"
+  description="Invite Remember Together students to give a free dementia awareness talk, volunteer, review our content as a health professional, or sign up for campaign updates."
+>
+  <PageBand theme="plain" title="Get involved" intro="Three ways to help us reach more families. Each form goes straight to our team, and we reply by email.">
+    <nav class="jump no-print" aria-label="On this page">
+      <ul role="list">
+        {sections.map((section) => <li><a class="button button--secondary button--small" href={`#${section.id}`}>{section.label}</a></li>)}
+      </ul>
+    </nav>
+  </PageBand>
+
+  <section id="talk" class="section" aria-labelledby="talk-title">
+    <div class="container grid-2">
+      <div class="form-intro">
+        <h2 id="talk-title">Request a talk</h2>
+        <p class="lead">We give free, friendly talks about dementia for schools, senior centers, libraries, faith groups and community events.</p>
+        <p>A talk covers what dementia is, the early warning signs, and how to support someone who is caring for a family member. We can also show the app, and we fit the length to your group.</p>
+        <p class="muted">We are students, so we usually present after school or on weekends. Tell us what works for you and we will find a time.</p>
+      </div>
+      <div class="card">
+        <Form name="talk-request" submitLabel="Send request" successTitle="Request sent" successText="Thank you. We will email you soon to talk about dates and details.">
+          <div class="field-row">
+            <Field name="name" label="Your name" required autocomplete="name" />
+            <Field name="email" label="Email address" type="email" required autocomplete="email" />
+          </div>
+          <Field name="organization" label="Organization or group" required autocomplete="organization" />
+          <div class="field-row">
+            <Field name="type" label="Type of group" type="select" required options={['School', 'Senior center', 'Library', 'Faith group', 'Community event', 'Other']} />
+            <Field name="audienceSize" label="Group size" type="number" min={1} />
+          </div>
+          <Field name="dates" label="Dates or times that work" hint="For example: any Saturday morning in November." />
+          <Field name="notes" label="Anything else we should know" type="textarea" rows={4} />
+        </Form>
+      </div>
+    </div>
+  </section>
+
+  <section id="volunteer" class="section section--rule" aria-labelledby="volunteer-title">
+    <div class="container grid-2">
+      <div class="form-intro">
+        <h2 id="volunteer-title">Volunteer or review our work</h2>
+        <p class="lead">We want everything we share to be accurate and kind. We would value help from people who know this subject well.</p>
+        <ul>
+          <li><strong>Health professionals and researchers:</strong> read our lessons and guides and tell us what to fix.</li>
+          <li><strong>Caregivers:</strong> tell us what would have helped you, and try the app before it launches.</li>
+          <li><strong>Community members:</strong> help us find places to give talks and share what we make.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <Form name="volunteer" submitLabel="Send" successTitle="Thank you for offering to help" successText="We read every message and will email you soon about next steps.">
+          <div class="field-row">
+            <Field name="name" label="Your name" required autocomplete="name" />
+            <Field name="email" label="Email address" type="email" required autocomplete="email" />
+          </div>
+          <Field name="role" label="Which describes you best?" type="select" required options={['Health professional', 'Researcher', 'Caregiver or family member', 'Community member', 'Other']} />
+          <Field name="background" label="Your work or experience" hint="For example: geriatric nurse, or I cared for my father for six years." />
+          <Field name="help" label="How would you like to help?" type="textarea" rows={4} required />
+        </Form>
+      </div>
+    </div>
+  </section>
+
+  <section id="updates" class="section section--rule" aria-labelledby="updates-title">
+    <div class="container grid-2">
+      <div class="form-intro">
+        <h2 id="updates-title">Get campaign updates</h2>
+        <p class="lead">An occasional email when the app launches and when we have news. No spam, and you can ask us to remove you at any time.</p>
+      </div>
+      <div class="card">
+        <Form name="newsletter" submitLabel="Sign up" successTitle="You are signed up" successText="Thank you. We will only email when we have something worth sharing.">
+          <Field name="email" label="Email address" type="email" required autocomplete="email" />
+          <fieldset class="field">
+            <legend>What would you like to hear about?</legend>
+            <div class="choices">
+              <Checkbox name="appLaunch">When the app launches</Checkbox>
+              <Checkbox name="campaignNews">Campaign news and new resources</Checkbox>
+            </div>
+          </fieldset>
+        </Form>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .jump ul { display: flex; flex-wrap: wrap; gap: var(--s-3); padding-top: var(--s-2); }
+  .form-intro > * + * { margin-top: var(--s-4); }
+  .form-intro ul { padding-left: var(--s-5); }
+  .form-intro li + li { margin-top: var(--s-3); }
+  @media (min-width: 56rem) {
+    .form-intro { position: sticky; top: var(--s-6); align-self: start; }
+  }
+</style>

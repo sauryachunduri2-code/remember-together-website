@@ -1,0 +1,72 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageBand from '../../components/PageBand.astro';
+import Icon from '../../components/Icon.astro';
+import { lessons } from '../../lib/content';
+
+const totalMinutes = lessons.reduce((sum, lesson) => sum + lesson.minutes, 0);
+---
+<Base
+  title="Learn about dementia"
+  description={`${lessons.length} short lessons on what dementia is, the early warning signs, the main types, lowering your risk, and common myths. Each one cites its sources.`}
+>
+  <PageBand
+    theme="learn"
+    title="Learn about dementia"
+    intro={`${lessons.length} short lessons, about ${totalMinutes} minutes in all. They are the same lessons as in the Remember Together app, and each one lists where its facts come from.`}
+  />
+
+  <section class="section">
+    <div class="container learn-layout">
+      <ol role="list" class="rows lesson-list">
+        {lessons.map((lesson, index) => (
+          <li>
+            <a class="row-link" href={`/learn/${lesson.id}/`}>
+              <span class="lesson-row">
+                <span class="lesson-number" aria-hidden="true">{index + 1}</span>
+                <span>
+                  <span class="row-title">{lesson.title}</span>
+                  <span class="row-meta">
+                    <span class="visually-hidden">Lesson {index + 1}. </span>{lesson.summary}. {lesson.minutes} minute read.
+                  </span>
+                </span>
+              </span>
+              <Icon name="chevron-right" />
+            </a>
+          </li>
+        ))}
+      </ol>
+
+      <aside class="learn-aside">
+        <div class="card stack">
+          <h2 class="aside-title">Where to start</h2>
+          <p>New to this? Start with <a href={`/learn/${lessons[0].id}/`}>{lessons[0].title.toLowerCase()}</a>. If you are worried about someone right now, read <a href="/learn/warning-signs/">the early warning signs</a>.</p>
+        </div>
+        <div class="card stack">
+          <h2 class="aside-title">Prefer paper?</h2>
+          <p>Every lesson prints as a clean handout. Open a lesson and press Print.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .learn-layout { display: grid; gap: var(--s-7); }
+  @media (min-width: 64rem) {
+    .learn-layout { grid-template-columns: repeat(12, 1fr); gap: var(--s-6); }
+    .lesson-list { grid-column: span 8; }
+    .learn-aside { grid-column: 10 / span 3; }
+  }
+  .lesson-row { display: flex; gap: var(--s-4); align-items: flex-start; }
+  .lesson-row .row-meta { display: block; }
+  .lesson-number {
+    display: inline-flex; align-items: center; justify-content: center; flex: none;
+    width: var(--s-7); height: var(--s-7);
+    border-radius: 50%;
+    background: var(--learn-tint); color: var(--learn-strong);
+    font-family: var(--font-serif); font-weight: 600; font-size: var(--text-lg);
+  }
+  .learn-aside { display: grid; gap: var(--s-4); align-content: start; }
+  .aside-title { font-size: var(--text-xl); line-height: var(--lh-xl); }
+</style>

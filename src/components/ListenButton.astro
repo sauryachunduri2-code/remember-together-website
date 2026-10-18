@@ -1,0 +1,109 @@
+---
+// Reads the page's main text out loud using the browser's built-in voice. Free, no account,
+// nothing leaves the device. Hidden on browsers that cannot speak.
+import Icon from './Icon.astro';
+---
+<div class="listen no-print" data-listen-controls hidden>
+  <button type="button" class="button button--secondary button--small" data-listen-toggle>
+    <Icon name="speaker" class="when-idle" />
+    <Icon name="pause" class="when-playing" />
+    <span data-listen-label>Listen</span>
+  </button>
+  <button type="button" class="button button--secondary button--small" data-listen-stop hidden>
+    <Icon name="stop" />
+    <span>Stop</span>
+  </button>
+</div>
+
+<script>
+  const controls = document.querySelector<HTMLElement>('[data-listen-controls]');
+  const root = document.querySelector<HTMLElement>('[data-listen-root]');
+  const synth = 'speechSynthesis' in window ? window.speechSynthesis : null;
+
+  if (controls && root && synth) {
+    controls.hidden = false;
+    const toggle = controls.querySelector<HTMLButtonElement>('[data-listen-toggle]')!;
+    const stop = controls.querySelector<HTMLButtonElement>('[data-listen-stop]')!;
+    const label = controls.querySelector<HTMLElement>('[data-listen-label]')!;
+
+    type State = 'idle' | 'playing' | 'paused';
+    let state: State = 'idle';
+    let queue: HTMLElement[] = [];
+    let index = 0;
+    let current: HTMLElement | null = null;
+
+    const pickVoice = () => {
+      const voices = synth.getVoices().filter((voice) => voice.lang.startsWith('en'));
+      return voices.find((voice) => voice.lang === 'en-US' && voice.localService) ?? voices.find((voice) => voice.lang === 'en-US') ?? voices[0];
+    };
+
+    const setState = (next: State) => {
+      state = next;
+      controls.dataset.state = next;
+      label.textContent = next === 'playing' ? 'Pause' : next === 'paused' ? 'Resume' : 'Listen';
+      stop.hidden = next === 'idle';
+    };
+
+    const mark = (element: HTMLElement | null) => {
+      current?.removeAttribute('data-speaking');
+      current = element;
+      current?.setAttribute('data-speaking', '');
+    };
+
+    const speakNext = () => {
+      if (state === 'idle') return;
+      if (index >= queue.length) { mark(null); setState('idle'); return; }
+      const element = queue[index++];
+      const text = element.innerText.trim();
+      if (!text) { speakNext(); return; }
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = pickVoice();
+      if (voice) utterance.voice = voice;
+      utterance.lang = 'en-US';
+      utterance.rate = 0.95;
+      utterance.onend = speakNext;
+      utterance.onerror = () => { mark(null); setState('idle'); };
+      mark(element);
+      synth.speak(utterance);
+    };
+
+    const start = () => {
+      synth.cancel();
+      // Speak one block at a time. Long single utterances get cut off in some browsers.
+      queue = Array.from(root.querySelectorAll<HTMLElement>('h1, h2, h3, p, li')).filter(
+        (element) => !element.closest('.no-listen, [hidden]') && !element.querySelector('p, li'),
+      );
+      index = 0;
+      setState('playing');
+      speakNext();
+    };
+
+    toggle.addEventListener('click', () => {
+      if (state === 'idle') start();
+      else if (state === 'playing') { synth.pause(); setState('paused'); }
+      else { synth.resume(); setState('playing'); }
+    });
+
+    stop.addEventListener('click', () => {
+      setState('idle');
+      synth.cancel();
+      mark(null);
+      toggle.focus();
+    });
+
+    window.addEventListener('pagehide', () => synth.cancel());
+  }
+</script>
+
+<style>
+  .listen { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+  .listen[hidden] { display: none; }
+  .listen :global(.when-playing) { display: none; }
+  .listen[data-state='playing'] :global(.when-idle) { display: none; }
+  .listen[data-state='playing'] :global(.when-playing) { display: block; }
+  :global([data-speaking]) {
+    background: var(--play-tint);
+    outline: var(--s-1) solid var(--play-tint);
+    border-radius: 4px;
+  }
+</style>

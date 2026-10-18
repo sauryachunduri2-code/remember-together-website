@@ -1,0 +1,293 @@
+{
+  "guides": [
+    {
+      "id": "late-day-confusion",
+      "group": "hard-moments",
+      "title": "Confusion in the evening",
+      "summary": "When late afternoon and evening get harder",
+      "symbol": "moon.stars.fill",
+      "sections": [
+        {
+          "heading": "What is happening",
+          "style": "text",
+          "items": [
+            "Some people with dementia become more confused, restless or upset in the late afternoon or evening. This is often called sundowning.",
+            "Common triggers are being very tired, a body clock that is out of step, dim light and shadows, and picking up on a caregiver’s stress."
+          ]
+        },
+        {
+          "heading": "What to try right now",
+          "style": "steps",
+          "items": [
+            "Come up to them calmly and gently. Speak softly.",
+            "Tell them they are safe and that you are there to help.",
+            "Do not argue or try to hold them back. If it is safe, let them pace.",
+            "Ask if they need something, such as the bathroom, a drink or a snack.",
+            "Make the room quiet and softly lit, with no dark corners. Turn off the TV and loud music. Play soothing music if they enjoy it."
+          ]
+        },
+        {
+          "heading": "What can help over time",
+          "style": "bullets",
+          "items": [
+            "Get outside, or sit by a window, in daylight every day.",
+            "Keep meals, bathing and bedtime at the same times each day.",
+            "Plan busier activities for the morning and early afternoon.",
+            "Limit long naps and dozing late in the day.",
+            "Avoid alcohol, caffeine and nicotine late in the day."
+          ]
+        },
+        {
+          "heading": "When to get help",
+          "style": "help",
+          "items": [
+            "Talk to a doctor about sleep problems. Treatable causes, such as a urinary tract infection or sleep apnea, can make things worse."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "name": "National Institute on Aging",
+          "title": "Coping With Agitation, Aggression, and Sundowning in Alzheimer’s Disease",
+          "url": "https://www.nia.nih.gov/health/alzheimers-changes-behavior-and-communication/coping-agitation-aggression-and-sundowning"
+        },
+        {
+          "name": "Alzheimer’s Association",
+          "title": "Sleep Issues and Sundowning",
+          "url": "https://www.alz.org/help-support/caregiving/stages-behaviors/sleep-issues-sundowning"
+        }
+      ]
+    },
+    {
+      "id": "wandering",
+      "group": "hard-moments",
+      "title": "Wandering",
+      "summary": "Staying safe if someone leaves or gets lost",
+      "symbol": "figure.walk",
+      "urgent": {
+        "title": "If someone is missing right now",
+        "text": "Start looking right away, beginning close to home. If you do not find them within 15 minutes, call 911 and say the person has dementia."
+      },
+      "sections": [
+        {
+          "heading": "What is happening",
+          "style": "text",
+          "items": [
+            "Wandering is when a person walks away without a clear purpose, or keeps trying to “go home” when they are already home. It can be dangerous, because they can get lost or hurt."
+          ]
+        },
+        {
+          "heading": "Signs it may happen",
+          "style": "bullets",
+          "items": [
+            "Coming back late from walks or drives",
+            "Forgetting the way to familiar places",
+            "Saying they want to “go home” when they are home",
+            "Pacing, restlessness, or trouble finding the bathroom or bedroom",
+            "Seeming lost in a new or changed place"
+          ]
+        },
+        {
+          "heading": "If they go missing",
+          "style": "steps",
+          "items": [
+            "Start looking right away. Check close to home first.",
+            "If they are not found within 15 minutes, call 911.",
+            "Tell the operator that the person has dementia.",
+            "Give the police a recent, close-up photo."
+          ]
+        },
+        {
+          "heading": "Getting ready ahead of time",
+          "style": "bullets",
+          "items": [
+            "Keep a recent, close-up photo of them where you can find it fast.",
+            "Put bells above doors, or use a door monitor that signals when a door opens.",
+            "Make sure they carry ID, or wear a bracelet with their name and your phone number.",
+            "Ask about a wandering response service in your area."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "name": "Alzheimer’s Association",
+          "title": "Wandering",
+          "url": "https://www.alz.org/help-support/caregiving/stages-behaviors/wandering"
+        },
+        {
+          "name": "National Institute on Aging",
+          "title": "Coping With Alzheimer’s Behaviors: Wandering and Getting Lost",
+          "url": "https://www.nia.nih.gov/health/alzheimers-changes-behavior-and-communication/coping-alzheimers-behaviors-wandering-and"
+        }
+      ]
+    },
+    {
+      "id": "repeated-questions",
+      "group": "hard-moments",
+      "title": "Repeated questions",
+      "summary": "When the same question comes up again and again",
+      "symbol": "arrow.triangle.2.circlepath",
+      "sections": [
+        {
+          "heading": "What is happening",
+          "style": "text",
+          "items": [
+            "A person with dementia may ask the same question many times. They may not remember asking. The question can also be a way of saying they feel worried, bored or unsure."
+          ]
+        },
+        {
+          "heading": "What to try",
+          "style": "steps",
+          "items": [
+            "Stay calm and patient. Use a gentle voice and touch.",
+            "Answer the question, even if you have to answer it several times.",
+            "Respond to the feeling. For example, “It sounds like you are worried. I am here.”",
+            "If they can still read, write the answer down and put it where they can see it. Clocks, calendars and photos can help too.",
+            "Offer something to do. They may be bored."
+          ]
+        },
+        {
+          "heading": "What can help over time",
+          "style": "bullets",
+          "items": [
+            "Look for a pattern: a time of day, a place, or certain people.",
+            "Keep a regular routine with pleasant activities.",
+            "If the repeating does no harm, it is okay to let it be."
+          ]
+        },
+        {
+          "heading": "Please avoid",
+          "style": "avoid",
+          "items": [
+            "Arguing or trying to use logic.",
+            "Saying “I already told you.” They cannot remember asking."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "name": "Alzheimer’s Association",
+          "title": "Repetition",
+          "url": "https://www.alz.org/help-support/caregiving/stages-behaviors/repetition"
+        },
+        {
+          "name": "National Institute on Aging",
+          "title": "Communicating With Someone Who Has Alzheimer’s Disease",
+          "url": "https://www.nia.nih.gov/health/alzheimers-changes-behavior-and-communication/communicating-someone-who-has-alzheimers"
+        }
+      ]
+    },
+    {
+      "id": "anger-agitation",
+      "group": "hard-moments",
+      "title": "Anger and agitation",
+      "summary": "When someone is restless, upset or lashes out",
+      "symbol": "exclamationmark.bubble.fill",
+      "urgent": {
+        "title": "If anyone is in danger",
+        "text": "Call 911. Tell the operator that the person has dementia."
+      },
+      "sections": [
+        {
+          "heading": "What is happening",
+          "style": "text",
+          "items": [
+            "Agitation means a person is restless and worried and cannot settle. They may pace, shout or lash out. There is usually a reason, even when it is hard to see.",
+            "Common causes include pain, an infection, hunger or thirst, tiredness, side effects of medicine, too much noise or too many people, feeling lost, being asked too many questions, and a sudden change in routine. They can also pick up on a caregiver’s stress."
+          ]
+        },
+        {
+          "heading": "What to try right now",
+          "style": "steps",
+          "items": [
+            "Stay calm. Speak softly and keep your face and body relaxed.",
+            "Do not argue. Listen, and tell them they are safe.",
+            "Lower the noise and move away from crowds.",
+            "Think about what happened just before it started.",
+            "Check for pain, hunger, thirst or needing the bathroom.",
+            "Offer something calming, such as music, a snack, a walk or a simple chore together.",
+            "If it is safe, step away for a moment and take a breath."
+          ]
+        },
+        {
+          "heading": "Keep everyone safe",
+          "style": "bullets",
+          "items": [
+            "Lock up car keys and anything that could cause harm, such as guns and kitchen knives."
+          ]
+        },
+        {
+          "heading": "When to get help",
+          "style": "help",
+          "items": [
+            "See a doctor for a full checkup, especially if the change came on suddenly. Pain, infection and medicine side effects can all cause agitation."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "name": "Alzheimer’s Association",
+          "title": "Aggression and Anger",
+          "url": "https://www.alz.org/help-support/caregiving/stages-behaviors/aggression-and-anger"
+        },
+        {
+          "name": "National Institute on Aging",
+          "title": "Coping With Agitation, Aggression, and Sundowning in Alzheimer’s Disease",
+          "url": "https://www.nia.nih.gov/health/alzheimers-changes-behavior-and-communication/coping-agitation-aggression-and-sundowning"
+        }
+      ]
+    },
+    {
+      "id": "talking-together",
+      "group": "talking",
+      "title": "Everyday conversation",
+      "summary": "Ways to talk that lower stress for both of you",
+      "symbol": "bubble.left.and.bubble.right.fill",
+      "sections": [
+        {
+          "heading": "How to talk together",
+          "style": "steps",
+          "items": [
+            "Go to them, make eye contact, and say their name.",
+            "Speak slowly and clearly, in a calm voice.",
+            "Use short, simple sentences. Say one thing at a time.",
+            "Ask yes or no questions. “Would you like some tea?” works better than “What would you like to drink?”",
+            "Give them time to answer. Try not to interrupt.",
+            "If they do not understand, try different words instead of repeating the same ones.",
+            "Talk in a quiet place with few distractions."
+          ]
+        },
+        {
+          "heading": "Your tone matters",
+          "style": "bullets",
+          "items": [
+            "Be aware of your tone, face and body language. Try to look relaxed and warm.",
+            "Be patient and try not to show frustration."
+          ]
+        },
+        {
+          "heading": "Please avoid",
+          "style": "avoid",
+          "items": [
+            "Arguing or correcting them.",
+            "Talking about them as if they are not in the room.",
+            "Baby talk or a baby voice."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "name": "National Institute on Aging",
+          "title": "Communicating With Someone Who Has Alzheimer’s Disease",
+          "url": "https://www.nia.nih.gov/health/alzheimers-changes-behavior-and-communication/communicating-someone-who-has-alzheimers"
+        },
+        {
+          "name": "Alzheimer’s Association",
+          "title": "Communication",
+          "url": "https://www.alz.org/help-support/caregiving/daily-care/communications"
+        }
+      ]
+    }
+  ],
+  "lastChecked": "October 2026"
+}

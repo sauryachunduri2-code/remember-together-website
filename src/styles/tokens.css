@@ -1,0 +1,136 @@
+/*
+  Remember Together design tokens.
+  Colors come from the app (DesignSystem/Palette.swift) so the site and app match.
+  Spacing is a strict 4 point scale. Never use a value that is not listed here.
+*/
+
+:root {
+  /* Surfaces */
+  --paper: #f6f1e7;
+  --surface: #fffcf5;
+  --hairline: #d9d0be;
+
+  /* Text */
+  --ink: #1a2147;
+  --ink-2: #474d6d;
+
+  /* Primary action */
+  --action: #1b3280;
+  --action-pressed: #112061;
+  --on-action: #fffbf2;
+
+  /* The one featured block on a page */
+  --feature: #1b2d72;
+  --on-feature: #f6f1e7;
+  --on-feature-2: #c9cbe0;
+
+  /* Single highlight and calm positive accent */
+  --gold: #f0b13a;
+  --gold-pressed: #d9993a;
+  --on-gold: #1a2147;
+  --teal: #0f6b75;
+
+  /* Section colors, matching the app's tabs. Color is never the only cue. */
+  --home-tint: #d6e4f7;
+  --home-strong: #1b3280;
+  --learn-tint: #e6d9f7;
+  --learn-strong: #6a4fb3;
+  --play-tint: #fae6b4;
+  --play-strong: #8a5a00;
+  --care-tint: #d7eeea;
+  --care-strong: #0f6b75;
+  --routine-tint: #e2edcb;
+  --routine-strong: #3d6b16;
+  --help-tint: #f6d8d4;
+  --help-strong: #b3261e;
+  --help-pressed: #8f1d17;
+  --on-help: #fffbf2;
+
+  --focus: #1b3280;
+  --success: #0f6b75;
+  --error: #b3261e;
+
+  /* Type */
+  --font-serif: 'Source Serif 4', 'New York', Georgia, serif;
+  --font-sans: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+
+  /* Type ramp. Size and line height always travel together. */
+  --text-sm: 0.9375rem;   --lh-sm: 1.5;
+  --text-md: 1.125rem;    --lh-md: 1.65;
+  --text-lg: 1.3125rem;   --lh-lg: 1.5;
+  --text-xl: 1.5rem;      --lh-xl: 1.3;
+  --text-2xl: clamp(1.875rem, 1.5rem + 1.2vw, 2.5rem);   --lh-2xl: 1.15;
+  --text-3xl: clamp(2.375rem, 1.75rem + 2.4vw, 3.5rem);  --lh-3xl: 1.08;
+
+  /* 4 point spacing scale */
+  --s-1: 0.25rem;  /*   4 */
+  --s-2: 0.5rem;   /*   8 */
+  --s-3: 0.75rem;  /*  12 */
+  --s-4: 1rem;     /*  16 */
+  --s-5: 1.5rem;   /*  24 */
+  --s-6: 2rem;     /*  32 */
+  --s-7: 3rem;     /*  48 */
+  --s-8: 4rem;     /*  64 */
+  --s-9: 6rem;     /*  96 */
+
+  /* Shape. One radius and one border weight for every component. */
+  --radius: 12px;
+  --border: 1px solid var(--hairline);
+
+  /* Layout */
+  --container: 72rem;
+  --measure: 40rem;
+  --gutter: var(--s-4);
+  --section: var(--s-8);
+  --tap: 3.5rem;      /* 56px, larger than the 44px minimum for older hands */
+  --tap-sm: 2.75rem;  /* 44px */
+
+  /* Motion. Only for state changes the person caused. */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --fast: 120ms;
+  --base: 200ms;
+
+  color-scheme: light dark;
+}
+
+@media (min-width: 48rem) {
+  :root { --gutter: var(--s-5); }
+}
+
+@media (min-width: 64rem) {
+  :root { --gutter: var(--s-6); --section: var(--s-9); }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #10132b;
+    --surface: #1a1e3f;
+    --hairline: #3a406e;
+    --ink: #f4efe4;
+    --ink-2: #c9c6d6;
+    --action: #f2c14e;
+    --action-pressed: #d9a93a;
+    --on-action: #10132b;
+    --feature: #232a5e;
+    --on-feature: #f6f1e7;
+    --on-feature-2: #c9c6d6;
+    --gold: #f2c14e;
+    --gold-pressed: #d9a93a;
+    --teal: #6fd0d8;
+    --home-tint: #1e3566;   --home-strong: #9fb4f5;
+    --learn-tint: #34285f;  --learn-strong: #b7a5f0;
+    --play-tint: #4a3d14;   --play-strong: #f2c14e;
+    --care-tint: #16424a;   --care-strong: #6fd0d8;
+    --routine-tint: #2b3a14; --routine-strong: #a6d46a;
+    --help-tint: #4a2220;   --help-strong: #ff8a80;
+    --help-pressed: #ff6f63;
+    --on-help: #10132b;
+    --focus: #f2c14e;
+    --success: #6fd0d8;
+    --error: #ff8a80;
+  }
+}
+
+/* Text size control (A, A+, A++). Everything is in rem, so the whole page scales evenly. */
+html[data-text-size='2'] { font-size: 112.5%; }
+html[data-text-size='3'] { font-size: 125%; }

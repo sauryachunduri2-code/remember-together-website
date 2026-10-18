@@ -1,0 +1,80 @@
+---
+// A drawing of the app's Home screen, built from the same colors and layout as the real one
+// (Features/Home/HomeView.swift). Swap for real screenshots when they are ready.
+---
+<figure class="phone" role="img" aria-label="The Remember Together app's Home screen. It suggests the next lesson, shows today's routine with a task ticked off, and links to caregiver guides and games.">
+  <div class="screen" aria-hidden="true">
+    <div class="screen-band">
+      <span class="screen-date">Friday, October 16</span>
+      <span class="screen-greeting">Good morning</span>
+    </div>
+    <div class="screen-body">
+      <span class="screen-label">Start here</span>
+      <div class="screen-row screen-row--learn screen-row--featured">
+        <span class="screen-row-title">Early warning signs</span>
+        <span class="screen-row-text">Lesson 2 of 5. About 5 minutes.</span>
+      </div>
+
+      <span class="screen-label">Today&rsquo;s routine</span>
+      <div class="screen-routine">
+        <span class="task task--done"><span class="box box--done"></span><span>Morning walk</span></span>
+        <span class="task"><span class="box"></span><span>Call Grandma</span></span>
+      </div>
+
+      <span class="screen-label">More to explore</span>
+      <div class="screen-row screen-row--care"><span class="screen-row-title">Caregiver guides</span></div>
+      <div class="screen-row screen-row--play"><span class="screen-row-title">Play a game</span></div>
+    </div>
+    <div class="tabbar">
+      <span class="tab tab--on">Home</span><span class="tab">Learn</span><span class="tab">Play</span><span class="tab">Care</span><span class="tab">Help</span>
+    </div>
+  </div>
+</figure>
+
+<style>
+  .phone {
+    width: 100%; max-width: 20rem;
+    margin: 0 auto;
+    padding: var(--s-3);
+    background: #1a2147;
+    border-radius: 2.75rem;
+  }
+  .screen {
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    border-radius: 2rem;
+    background: #f6f1e7;
+    color: #1a2147;
+    aspect-ratio: 9 / 19;
+  }
+  .screen-band {
+    display: grid; gap: var(--s-1);
+    padding: var(--s-7) var(--s-5) var(--s-5);
+    background: #d6e4f7;
+  }
+  .screen-date { font-size: var(--text-sm); line-height: var(--lh-sm); font-weight: 700; }
+  .screen-greeting { font-family: var(--font-serif); font-weight: 600; font-size: var(--text-xl); line-height: var(--lh-xl); }
+  .screen-body { display: grid; gap: var(--s-2); align-content: start; flex: 1; padding: var(--s-4) var(--s-4) 0; }
+  .screen-label { margin-top: var(--s-2); font-size: var(--text-sm); line-height: var(--lh-sm); font-weight: 700; color: #474d6d; }
+  .screen-label:first-child { margin-top: 0; }
+  .screen-row { display: grid; gap: var(--s-1); padding: var(--s-3) var(--s-4); border-radius: var(--radius); }
+  .screen-row--featured { padding: var(--s-4); }
+  .screen-row--learn { background: #e6d9f7; }
+  .screen-row--care { background: #d7eeea; }
+  .screen-row--play { background: #fae6b4; }
+  .screen-row-title { font-family: var(--font-serif); font-weight: 600; font-size: var(--text-md); line-height: 1.3; }
+  .screen-row-text { font-size: var(--text-sm); line-height: var(--lh-sm); color: #474d6d; }
+  .screen-routine { display: grid; gap: var(--s-2); padding: var(--s-3) var(--s-4); background: #fffcf5; border: 1px solid #d9d0be; border-radius: var(--radius); }
+  .task { display: flex; align-items: center; gap: var(--s-3); font-size: var(--text-sm); line-height: var(--lh-sm); font-weight: 700; }
+  .task--done span:last-child { text-decoration: line-through; color: #474d6d; font-weight: 400; }
+  .box { width: var(--s-4); height: var(--s-4); flex: none; border: 2px solid #474d6d; border-radius: 4px; }
+  .box--done { background: #3d6b16; border-color: #3d6b16; }
+  .tabbar {
+    display: flex; justify-content: space-around;
+    padding: var(--s-3) var(--s-2) var(--s-4);
+    border-top: 1px solid #d9d0be;
+    background: #fffcf5;
+    font-size: var(--text-sm); line-height: 1; color: #474d6d;
+  }
+  .tab--on { color: #1b3280; font-weight: 700; }
+</style>

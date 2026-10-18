@@ -1,0 +1,431 @@
+{
+  "lessons": [
+    {
+      "id": "what-is-dementia",
+      "title": "What dementia is",
+      "summary": "What the word means, and how it differs from normal aging",
+      "minutes": 4,
+      "published": true,
+      "intro": "About 57 million people worldwide were living with dementia in 2021, according to the World Health Organization. Knowing what it is, and what it is not, is the first step to helping.",
+      "sections": [
+        {
+          "heading": "A group of symptoms, not one disease",
+          "paragraphs": [
+            "Dementia is a general term for changes in memory, thinking, language and problem solving that are serious enough to get in the way of daily life.",
+            "It is not one disease. It is a set of symptoms that different diseases can cause. Alzheimer’s disease is the most common cause. Others include vascular dementia, Lewy body dementia and frontotemporal dementia."
+          ]
+        },
+        {
+          "heading": "More than memory loss",
+          "paragraphs": [
+            "Memory problems are often the first thing people notice. But dementia can affect much more than memory.",
+            "It can change how a person speaks, plans and makes decisions. It can make everyday tasks harder, like paying bills or following a recipe. Mood, behavior and personality can change too."
+          ]
+        },
+        {
+          "heading": "Normal aging or something more?",
+          "paragraphs": [
+            "Everyone forgets things sometimes. Some changes are a common part of getting older:"
+          ],
+          "bullets": [
+            "Sometimes having trouble finding the right word",
+            "Misplacing things from time to time, then finding them by retracing your steps",
+            "Being confused about the day of the week, then figuring it out later"
+          ]
+        },
+        {
+          "paragraphs": [
+            "These changes are more worrying, and are worth talking to a doctor about:"
+          ],
+          "bullets": [
+            "Forgetting where you are or how you got there",
+            "Losing things in unusual places and not being able to retrace your steps",
+            "Struggling to name a familiar object"
+          ]
+        },
+        {
+          "paragraphs": [
+            "The difference is that with dementia, the changes keep happening and make daily life harder."
+          ]
+        },
+        {
+          "heading": "Dementia is not a normal part of getting older",
+          "paragraphs": [
+            "Dementia becomes more common as people age. But it is not an inevitable part of aging. Getting older does not mean you will get dementia.",
+            "It can also affect younger people. When symptoms begin before age 65, it is called young-onset dementia. About 9 out of every 100 people with dementia have the young-onset kind."
+          ]
+        },
+        {
+          "heading": "Some causes can be treated",
+          "paragraphs": [
+            "Some health problems can look like dementia. These include low vitamin B12, thyroid problems, depression, and side effects from medicines. When the cause is treated, memory and thinking can sometimes improve.",
+            "This is one more reason to see a doctor about memory changes. Do not assume it is dementia, and do not ignore it."
+          ]
+        },
+        {
+          "heading": "What can be done",
+          "paragraphs": [
+            "There is no cure for dementia yet. But a lot can be done to support people living with dementia, and the people who care for them.",
+            "A doctor can look for the cause, help manage symptoms, and help a family plan ahead."
+          ]
+        }
+      ],
+      "keyPoints": [
+        "Dementia is a group of symptoms, not one disease.",
+        "Alzheimer’s disease is the most common cause.",
+        "It affects more than memory.",
+        "It is not a normal part of getting older.",
+        "Some causes can be treated, so see a doctor about memory changes."
+      ],
+      "sources": [
+        {
+          "name": "National Institute on Aging",
+          "title": "What Is Dementia? Symptoms, Types, and Diagnosis",
+          "url": "https://www.nia.nih.gov/health/alzheimers-and-dementia/what-dementia-symptoms-types-and-diagnosis"
+        },
+        {
+          "name": "Alzheimer’s Association",
+          "title": "What Is Dementia?",
+          "url": "https://www.alz.org/alzheimers-dementia/what-is-dementia"
+        },
+        {
+          "name": "Alzheimer’s Association",
+          "title": "10 Early Signs and Symptoms of Alzheimer’s and Dementia",
+          "url": "https://www.alz.org/alzheimers-dementia/10_signs"
+        },
+        {
+          "name": "World Health Organization",
+          "title": "Dementia fact sheet",
+          "url": "https://www.who.int/news-room/fact-sheets/detail/dementia"
+        }
+      ],
+      "lastChecked": "October 2026"
+    },
+    {
+      "id": "warning-signs",
+      "title": "Early warning signs",
+      "summary": "What to look for, and when to see a doctor",
+      "minutes": 5,
+      "published": true,
+      "intro": "Spotting changes early matters. With an early diagnosis, people can look for causes, try treatments that may ease symptoms, and keep their independence longer.",
+      "sections": [
+        {
+          "heading": "One sign is not a diagnosis",
+          "paragraphs": [
+            "The Alzheimer’s Association lists ten early warning signs. Everyone has off days. What matters is a pattern of changes that keep happening and get in the way of daily life.",
+            "Below, each sign is paired with what can be a usual part of getting older."
+          ]
+        },
+        {
+          "heading": "Memory and thinking",
+          "bullets": [
+            "Memory loss that disrupts daily life, such as forgetting new information or asking the same question again and again. Usual aging: forgetting a name or an appointment, then remembering it later.",
+            "Trouble planning or solving problems, such as following a plan or working with numbers. Usual aging: an occasional mistake with a bill.",
+            "Trouble finishing familiar tasks, such as driving to a place you know well. Usual aging: needing help with a new gadget.",
+            "Confusion about time or place, such as losing track of dates or seasons. Usual aging: forgetting the day of the week, then working it out."
+          ]
+        },
+        {
+          "heading": "Seeing, words and misplacing things",
+          "bullets": [
+            "Trouble understanding what you see, such as judging distance or reading. Usual aging: vision changes from cataracts.",
+            "New problems with words, such as losing track of a conversation or struggling to name a familiar object. Usual aging: sometimes searching for the right word.",
+            "Losing things and not being able to retrace your steps, or putting things in unusual places. Usual aging: misplacing something now and then, then finding it by retracing your steps."
+          ]
+        },
+        {
+          "heading": "Judgment, mood and withdrawing",
+          "bullets": [
+            "Poor judgment, such as unusual choices with money or letting personal care slip. Usual aging: making a bad decision once in a while.",
+            "Pulling away from work, hobbies or friends. Usual aging: sometimes not feeling like social events.",
+            "Changes in mood or personality, such as becoming confused, suspicious, anxious or fearful. Usual aging: getting irritable when a routine is disrupted."
+          ]
+        },
+        {
+          "heading": "What to do",
+          "paragraphs": [
+            "If you notice several of these signs, or one that keeps getting worse, make an appointment with a doctor. Bring a family member or friend if you can, because they may have noticed things you have not.",
+            "Many things can cause these changes, and some can be treated, such as low vitamin B12, thyroid problems, depression and medicine side effects. That is one more reason not to wait.",
+            "This list is not a test. Only a doctor can find out what is causing a change."
+          ]
+        }
+      ],
+      "keyPoints": [
+        "There are ten early warning signs.",
+        "One slip is not a diagnosis. A pattern that gets worse is what matters.",
+        "Early help can mean more options and more independence.",
+        "Some causes can be treated.",
+        "If you are worried, see a doctor."
+      ],
+      "sources": [
+        {
+          "name": "Alzheimer’s Association",
+          "title": "10 Early Signs and Symptoms of Alzheimer’s and Dementia",
+          "url": "https://www.alz.org/alzheimers-dementia/10_signs"
+        },
+        {
+          "name": "National Institute on Aging",
+          "title": "What Are the Signs of Alzheimer’s Disease?",
+          "url": "https://www.nia.nih.gov/health/alzheimers-symptoms-and-diagnosis/what-are-signs-alzheimers-disease"
+        },
+        {
+          "name": "Alzheimer’s Association",
+          "title": "Myths About Alzheimer’s and Dementia",
+          "url": "https://www.alz.org/alzheimers-dementia/what-is-alzheimers/myths"
+        }
+      ],
+      "lastChecked": "October 2026"
+    },
+    {
+      "id": "types",
+      "title": "Types of dementia",
+      "summary": "Alzheimer’s disease and the others",
+      "minutes": 5,
+      "published": true,
+      "intro": "Dementia has more than one cause. Knowing the main types helps explain why symptoms can look so different from one person to the next.",
+      "sections": [
+        {
+          "heading": "Alzheimer’s disease",
+          "paragraphs": [
+            "Alzheimer’s is the most common cause, behind about 60 to 80 out of every 100 cases of dementia.",
+            "Two abnormal structures build up in the brain. Plaques are deposits of a protein called beta-amyloid between nerve cells. Tangles are twisted fibers of a protein called tau inside the cells. Together they stop cells from working and communicating.",
+            "The earliest sign is often trouble remembering new information. Symptoms get worse gradually over a number of years."
+          ]
+        },
+        {
+          "heading": "Vascular dementia",
+          "paragraphs": [
+            "Vascular dementia happens when something blocks or reduces blood flow to parts of the brain, so cells do not get enough oxygen. It can follow a stroke, or build up slowly from many small strokes.",
+            "Early signs can include trouble with planning and judgment, a shorter attention span, and trouble finding words. Depending on where blood flow is reduced, thinking can be affected without much memory loss at first.",
+            "On its own it makes up roughly 5 to 10 out of every 100 cases, and it is often found together with other types."
+          ]
+        },
+        {
+          "heading": "Lewy body dementia",
+          "paragraphs": [
+            "Lewy body dementia involves abnormal deposits of a protein called alpha-synuclein in the brain.",
+            "Signs that stand out include seeing vivid, detailed things that are not there, acting out dreams during sleep, movement changes such as tremor or stiffness, and attention and alertness that go up and down."
+          ]
+        },
+        {
+          "heading": "Frontotemporal dementia",
+          "paragraphs": [
+            "This is a group of conditions where nerve cells are lost mainly in the front and sides of the brain. Those areas help with behavior, personality and language.",
+            "Changes in personality, behavior or language are often the first signs. It is most often diagnosed between ages 40 and 65, which is younger than most other types."
+          ]
+        },
+        {
+          "heading": "Mixed dementia",
+          "paragraphs": [
+            "Some people have more than one type at once. The most common mix is Alzheimer’s disease together with vascular dementia.",
+            "Research suggests mixed dementia is more common than once thought. Often it is only confirmed after death, so during life most people are given a single diagnosis."
+          ]
+        },
+        {
+          "heading": "Why it matters",
+          "paragraphs": [
+            "Different types can call for different care and treatment. A doctor can work out which type is most likely, and what that means for the person and their family."
+          ]
+        }
+      ],
+      "keyPoints": [
+        "Alzheimer’s disease is the most common type.",
+        "Vascular dementia comes from reduced blood flow to the brain.",
+        "Lewy body dementia can cause vivid hallucinations and changes in alertness.",
+        "Frontotemporal dementia often begins with changes in personality, behavior or language.",
+        "A person can have more than one type at the same time."
+      ],
+      "sources": [
+        {
+          "name": "Alzheimer’s Association",
+          "title": "What Is Alzheimer’s Disease?",
+          "url": "https://www.alz.org/alzheimers-dementia/what-is-alzheimers"
+        },
+        {
+          "name": "Alzheimer’s Association",
+          "title": "Vascular Dementia",
+          "url": "https://www.alz.org/alzheimers-dementia/what-is-dementia/types-of-dementia/vascular-dementia"
+        },
+        {
+          "name": "Alzheimer’s Association",
+          "title": "Dementia with Lewy Bodies",
+          "url": "https://www.alz.org/alzheimers-dementia/what-is-dementia/types-of-dementia/dementia-with-lewy-bodies"
+        },
+        {
+          "name": "Alzheimer’s Association",
+          "title": "Frontotemporal Dementia",
+          "url": "https://www.alz.org/alzheimers-dementia/what-is-dementia/types-of-dementia/frontotemporal-dementia"
+        },
+        {
+          "name": "Alzheimer’s Association",
+          "title": "Mixed Dementia",
+          "url": "https://www.alz.org/alzheimers-dementia/what-is-dementia/types-of-dementia/mixed-dementia"
+        }
+      ],
+      "lastChecked": "October 2026"
+    },
+    {
+      "id": "lowering-risk",
+      "title": "Lowering your risk",
+      "summary": "What the research says",
+      "minutes": 5,
+      "published": true,
+      "intro": "No one can promise they will, or will not, get dementia. But research has found habits and health conditions that are linked to risk, and many of them can be changed.",
+      "sections": [
+        {
+          "heading": "What the research says",
+          "paragraphs": [
+            "A major 2024 review, the Lancet Commission, named 14 risk factors that can be changed. It estimated that addressing all of them could prevent or delay up to about 45 out of every 100 cases worldwide.",
+            "That is an estimate for whole populations, not a promise for one person. The National Institute on Aging describes the evidence for most lifestyle steps as encouraging but not yet conclusive."
+          ]
+        },
+        {
+          "heading": "Best supported so far",
+          "paragraphs": [
+            "A review by the National Academies found encouraging, but not conclusive, evidence for three things:"
+          ],
+          "bullets": [
+            "Keeping high blood pressure under control",
+            "Being physically active",
+            "Cognitive training, which means exercises that practice thinking skills"
+          ]
+        },
+        {
+          "heading": "Other risk factors on the list",
+          "paragraphs": [
+            "These have also been linked to dementia risk:"
+          ],
+          "bullets": [
+            "Hearing loss that is not treated. In one large study, hearing aids slowed the decline in thinking for older adults at higher risk.",
+            "Vision loss that is not treated",
+            "Smoking and heavy drinking",
+            "Diabetes, obesity and high “bad” (LDL) cholesterol",
+            "Depression and social isolation",
+            "Head injuries and air pollution",
+            "Less time in school early in life"
+          ]
+        },
+        {
+          "heading": "Things to try",
+          "bullets": [
+            "Move your body most days. A daily walk counts.",
+            "Have your blood pressure, blood sugar and cholesterol checked, and follow your doctor’s advice.",
+            "Have your hearing and eyesight checked, and use hearing aids or glasses if you need them.",
+            "Stay in touch with people. Call a friend, join a group, or volunteer.",
+            "Keep learning and keep your mind busy.",
+            "Protect your head. Wear a helmet and make your home safer to prevent falls."
+          ]
+        },
+        {
+          "heading": "What does not work",
+          "paragraphs": [
+            "No single food, vitamin or supplement has been proven to prevent Alzheimer’s disease. Be careful with products that promise to.",
+            "If you want to start somewhere, pick one thing from the list. Talk to your doctor about the rest."
+          ]
+        }
+      ],
+      "keyPoints": [
+        "Some risk factors can be changed.",
+        "Blood pressure, physical activity and thinking exercises have the best support so far.",
+        "Treating hearing and vision loss matters.",
+        "The evidence is encouraging, not final.",
+        "No single food or supplement has been shown to prevent Alzheimer’s."
+      ],
+      "sources": [
+        {
+          "name": "National Institute on Aging",
+          "title": "Preventing Alzheimer’s Disease: What Do We Know?",
+          "url": "https://www.nia.nih.gov/health/alzheimers-and-dementia/preventing-alzheimers-disease-what-do-we-know"
+        },
+        {
+          "name": "University College London",
+          "title": "Nearly half of dementia cases could be prevented or delayed by tackling 14 risk factors",
+          "url": "https://www.ucl.ac.uk/news/2024/jul/nearly-half-dementia-cases-could-be-prevented-or-delayed-tackling-14-risk-factors"
+        },
+        {
+          "name": "Alzheimer’s Association",
+          "title": "Myths About Alzheimer’s and Dementia",
+          "url": "https://www.alz.org/alzheimers-dementia/what-is-alzheimers/myths"
+        }
+      ],
+      "lastChecked": "October 2026"
+    },
+    {
+      "id": "myths",
+      "title": "Myths and facts",
+      "summary": "Common beliefs, checked",
+      "minutes": 4,
+      "published": true,
+      "intro": "Wrong ideas about dementia make it harder to get help and harder to be kind. Here are seven common ones, and what is true.",
+      "sections": [
+        {
+          "heading": "Myth: Memory loss is just normal aging",
+          "paragraphs": [
+            "Fact: Forgetting now and then is normal. Dementia is different. Brain cells stop working and die, and the changes get in the way of daily life."
+          ]
+        },
+        {
+          "heading": "Myth: Dementia and Alzheimer’s are the same",
+          "paragraphs": [
+            "Fact: Dementia describes a group of symptoms. Alzheimer’s is one disease that causes them, and the most common one."
+          ]
+        },
+        {
+          "heading": "Myth: Only old people get it",
+          "paragraphs": [
+            "Fact: Most cases are in older adults, but people in their 30s, 40s and 50s can have younger-onset Alzheimer’s. More than 200,000 people in the United States under 65 are living with it."
+          ]
+        },
+        {
+          "heading": "Myth: It can only be diagnosed after death",
+          "paragraphs": [
+            "Fact: Doctors can now diagnose it in living people, using memory and thinking tests, brain scans and other tests."
+          ]
+        },
+        {
+          "heading": "Myth: One food or supplement can prevent it",
+          "paragraphs": [
+            "Fact: No single food or supplement has been shown to prevent or treat Alzheimer’s. Healthy habits overall are what the research supports."
+          ]
+        },
+        {
+          "heading": "Myth: Nothing can be done",
+          "paragraphs": [
+            "Fact: There is no cure yet. But some newer medicines can slow the disease a little in the early stage, other treatments can ease symptoms, and good care and support make a real difference."
+          ]
+        },
+        {
+          "heading": "Myth: Memory problems always mean dementia",
+          "paragraphs": [
+            "Fact: Depression, sleep problems, medicine side effects and low vitamin levels can all cause memory trouble, and some of these can be treated. See a doctor to find out."
+          ]
+        }
+      ],
+      "keyPoints": [
+        "Dementia is not just normal aging.",
+        "Dementia and Alzheimer’s are not the same word.",
+        "It can affect people under 65.",
+        "It can be diagnosed in living people.",
+        "Support and treatments can help, even without a cure."
+      ],
+      "sources": [
+        {
+          "name": "Alzheimer’s Association",
+          "title": "Myths About Alzheimer’s and Dementia",
+          "url": "https://www.alz.org/alzheimers-dementia/what-is-alzheimers/myths"
+        },
+        {
+          "name": "World Health Organization",
+          "title": "Dementia fact sheet",
+          "url": "https://www.who.int/news-room/fact-sheets/detail/dementia"
+        },
+        {
+          "name": "National Institute on Aging",
+          "title": "What Is Dementia? Symptoms, Types, and Diagnosis",
+          "url": "https://www.nia.nih.gov/health/alzheimers-and-dementia/what-dementia-symptoms-types-and-diagnosis"
+        }
+      ],
+      "lastChecked": "October 2026"
+    }
+  ]
+}

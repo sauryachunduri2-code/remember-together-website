@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import PageBand from '../components/PageBand.astro';
+import Form from '../components/Form.astro';
+import Field from '../components/Field.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../site.config';
+---
+<Base title="Contact us" description="Questions, ideas or feedback for the Remember Together team. Send us a message or email us directly.">
+  <PageBand theme="plain" title="Contact us" intro="Questions, ideas, or feedback on the app or this site. A real person on our team reads every message." />
+
+  <section class="section">
+    <div class="container grid-2">
+      <div class="contact-side">
+        <div class="stack">
+          <h2 class="side-title">Other ways to reach us</h2>
+          <ul role="list" class="channels">
+            <li><a href={`mailto:${site.email}`}><Icon name="mail" /><span>{site.email}</span></a></li>
+            <li><a href={site.instagram.url} rel="noopener" target="_blank"><Icon name="instagram" /><span>@{site.instagram.handle} on Instagram</span><span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          </ul>
+        </div>
+
+        <div class="stack">
+          <h2 class="side-title">Looking for something specific?</h2>
+          <ul role="list" class="rows">
+            <li><a class="row-link" href="/get-involved/#talk"><span class="row-title">Ask us to give a talk</span><Icon name="chevron-right" /></a></li>
+            <li><a class="row-link" href="/stories/#share"><span class="row-title">Share a story</span><Icon name="chevron-right" /></a></li>
+            <li><a class="row-link" href="/get-involved/#volunteer"><span class="row-title">Volunteer or review our work</span><Icon name="chevron-right" /></a></li>
+          </ul>
+        </div>
+
+        <div class="callout callout--urgent">
+          <p class="callout-title">This form is not for emergencies</p>
+          <p>We are students and may take a few days to reply. If someone needs help now, call 911 or <a href="/help/">see the helplines</a>.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <Form name="contact" submitLabel="Send message" successTitle="Message sent" successText="Thank you for writing. We will reply to the email address you gave us.">
+          <div class="field-row">
+            <Field name="name" label="Your name" required autocomplete="name" />
+            <Field name="email" label="Email address" type="email" required autocomplete="email" />
+          </div>
+          <Field name="message" label="Message" type="textarea" rows={8} required error="Please write a message before sending." />
+        </Form>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-side { display: grid; gap: var(--s-7); align-content: start; }
+  .side-title { font-size: var(--text-xl); line-height: var(--lh-xl); }
+  .channels { display: grid; gap: var(--s-1); }
+  .channels a {
+    display: inline-flex; align-items: center; gap: var(--s-3);
+    min-height: var(--tap-sm);
+    font-weight: 700; color: var(--ink); text-decoration: none;
+  }
+  .channels a:hover span:first-of-type { text-decoration: underline; }
+  .channels span { min-width: 0; overflow-wrap: anywhere; }
+  .channels :global(.icon) { width: 1.5rem; height: 1.5rem; color: var(--ink-2); }
+</style>

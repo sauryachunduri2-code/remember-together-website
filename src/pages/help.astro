@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import PageBand from '../components/PageBand.astro';
+import Icon from '../components/Icon.astro';
+import HelplineList from '../components/HelplineList.astro';
+import { guides } from '../lib/content';
+
+const wandering = guides.find((guide) => guide.id === 'wandering');
+const missingSteps = wandering?.sections.find((section) => section.style === 'steps');
+---
+<Base
+  title="Need help now?"
+  description="Free helplines for dementia support, crisis and poison help, plus what to do right away if someone with dementia is missing."
+>
+  <PageBand theme="help" title="Need help now?" intro="Free numbers you can call any time. On a phone, tap a number to start the call.">
+    <div class="emergency">
+      <a class="button button--help" href="tel:911"><Icon name="phone" />In an emergency, call 911</a>
+      <p>Call 911 right away if someone is in danger, has been hurt, or cannot be found.</p>
+    </div>
+  </PageBand>
+
+  <section class="section">
+    <div class="container help-layout">
+      <div>
+        <h2 class="block-title">Helplines</h2>
+        <HelplineList />
+        <p class="text-sm muted fine-print">Remember Together is a student project. We are not a medical or emergency service, and we do not run any of these lines.</p>
+      </div>
+
+      {missingSteps && (
+        <aside class="tint tint--help missing" aria-labelledby="missing-title">
+          <h2 id="missing-title" class="block-title">If someone with dementia is missing</h2>
+          <ol class="missing-steps">
+            {missingSteps.items.map((item) => <li>{item}</li>)}
+          </ol>
+          <a class="text-link" href="/caregivers/wandering/">Read the full wandering guide<Icon name="arrow-right" /></a>
+        </aside>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .emergency { display: grid; gap: var(--s-3); justify-items: start; padding-top: var(--s-2); }
+  .emergency p { font-weight: 700; }
+  .help-layout { display: grid; gap: var(--s-7); }
+  @media (min-width: 64rem) {
+    .help-layout { grid-template-columns: repeat(12, 1fr); gap: var(--s-6); }
+    .help-layout > :first-child { grid-column: span 7; }
+    .help-layout > :last-child { grid-column: 9 / span 4; align-self: start; }
+  }
+  .block-title { font-size: var(--text-xl); line-height: var(--lh-xl); margin-bottom: var(--s-4); }
+  .fine-print { margin-top: var(--s-5); }
+  .missing > * + * { margin-top: var(--s-4); }
+  .missing .block-title { margin-bottom: 0; }
+  .missing-steps { padding-left: var(--s-5); }
+  .missing-steps li + li { margin-top: var(--s-2); }
+</style>

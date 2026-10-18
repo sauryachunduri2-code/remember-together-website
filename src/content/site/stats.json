@@ -1,0 +1,12 @@
+{
+  "stats": [
+    { "figure": "More than 7 million", "text": "Americans are living with Alzheimer's disease, the most common cause of dementia.", "source": "Alzheimer's Association, 2026 Facts and Figures" },
+    { "figure": "Nearly 13 million", "text": "Americans give unpaid care to a family member or friend with dementia.", "source": "Alzheimer's Association, 2026 Facts and Figures" },
+    { "figure": "19 billion hours", "text": "of unpaid care in 2025, valued at more than $446 billion.", "source": "Alzheimer's Association, 2026 Facts and Figures" },
+    { "figure": "57 million", "text": "people around the world were living with dementia in 2021.", "source": "World Health Organization, Dementia fact sheet" }
+  ],
+  "sources": [
+    { "name": "Alzheimer's Association", "title": "2026 Alzheimer's Disease Facts and Figures", "url": "https://www.alz.org/alzheimers-dementia/facts-figures" },
+    { "name": "World Health Organization", "title": "Dementia fact sheet", "url": "https://www.who.int/news-room/fact-sheets/detail/dementia" }
+  ]
+}

@@ -1,0 +1,138 @@
+---
+import Base from '../layouts/Base.astro';
+import PageBand from '../components/PageBand.astro';
+import Icon from '../components/Icon.astro';
+import team from '../content/site/team.json';
+import progress from '../content/site/progress.json';
+import { site } from '../site.config';
+
+interface Member { name: string; role: string; bio?: string }
+const members = team.members as Member[];
+
+const principles = [
+  { title: 'Every fact has a source', text: 'Our lessons and guides come from the Alzheimer’s Association, the National Institute on Aging, the CDC and the World Health Organization. Each page lists its sources.' },
+  { title: 'We do not diagnose', text: 'We explain what dementia is and when to see a doctor. We never tell anyone whether they have it.' },
+  { title: 'Your information stays yours', text: 'The app has no accounts and keeps what you enter on your phone. We never sell or share what you send us.' },
+  { title: 'Free for everyone', text: 'No ads, no subscriptions and nothing to buy, in the app or on this site.' },
+];
+---
+<Base
+  title="About the campaign"
+  description="Remember Together is a HOSA Community Awareness campaign by high school sophomores, helping families understand dementia and support the people who care for someone with it."
+>
+  <PageBand theme="plain" title="About Remember Together" intro="We are high school sophomores in HOSA, running a campaign to help our community understand dementia and support the people who care for someone living with it." />
+
+  <section class="section" aria-labelledby="why-title">
+    <div class="container grid-2">
+      <h2 id="why-title">Why we started</h2>
+      <div class="prose">
+        <p class="lead">Most people learn about dementia only when someone in their family is diagnosed. By then, they are learning while also caring for someone they love.</p>
+        <p>We wanted to make the basics easy to find earlier: what dementia is, how it differs from normal aging, and what to do when a day gets hard. We also wanted to give caregivers something practical they can open in the middle of a difficult moment.</p>
+        <p>So we built a free app, wrote lessons and guides from trusted health organizations, and started sharing what we learn on Instagram and in our community. This website brings it all together.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--rule" aria-labelledby="made-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="made-title">What we have made so far</h2>
+      </div>
+      <dl class="made">
+        {progress.made.map((item) => (
+          <div class="made-item">
+            <dt class="made-figure">{item.figure}</dt>
+            <dd>{item.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="section section--rule" aria-labelledby="impact-title">
+    <div class="container grid-2">
+      <div class="stack">
+        <h2 id="impact-title">How we measure our impact</h2>
+        <p class="muted">We will post our numbers here as the campaign grows.</p>
+      </div>
+      <ul class="measures">
+        {progress.measures.map((measure) => <li>{measure}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--rule" aria-labelledby="how-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="how-title">How we work</h2>
+      </div>
+      <dl class="principles">
+        {principles.map((principle) => (
+          <div class="principle">
+            <dt>{principle.title}</dt>
+            <dd>{principle.text}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="section section--rule" aria-labelledby="team-title">
+    <div class="container grid-2">
+      <div class="stack">
+        <h2 id="team-title">Our team</h2>
+        <p class="muted">A HOSA Community Awareness team.</p>
+      </div>
+      {members.length > 0 ? (
+        <ul role="list" class="rows team">
+          {members.map((member) => (
+            <li class="member">
+              <p class="row-title">{member.name}</p>
+              <p class="row-meta">{member.role}</p>
+              {member.bio && <p>{member.bio}</p>}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="prose">
+          <p class="lead">We are a small group of HOSA members who want our community to understand dementia before it arrives.</p>
+          <p>Team introductions are coming to this page soon. Until then, you can reach all of us at <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section section--rule">
+    <div class="container cta">
+      <h2>Want to help, or have a question?</h2>
+      <div class="cta-actions">
+        <a class="button button--primary" href="/get-involved/">Get involved<Icon name="arrow-right" /></a>
+        <a class="button button--secondary" href="/contact/">Contact us</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .made { display: grid; gap: var(--s-4); }
+  @media (min-width: 40rem) { .made { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 64rem) { .made { grid-template-columns: repeat(4, 1fr); gap: var(--s-6); } }
+  .made-item { display: grid; gap: var(--s-2); align-content: start; padding-top: var(--s-4); border-top: 2px solid var(--ink); }
+  .made-figure { font-family: var(--font-serif); font-weight: 600; font-size: var(--text-3xl); line-height: var(--lh-3xl); }
+
+  .measures { padding-left: var(--s-5); }
+  .measures li { font-size: var(--text-lg); line-height: var(--lh-lg); }
+  .measures li + li { margin-top: var(--s-3); }
+
+  .principles { display: grid; border-top: var(--border); }
+  @media (min-width: 48rem) { .principles { grid-template-columns: 1fr 1fr; column-gap: var(--s-6); } }
+  .principle { display: grid; align-content: start; gap: var(--s-2); padding-block: var(--s-5); border-bottom: var(--border); }
+  .principle dt { font-family: var(--font-serif); font-weight: 600; font-size: var(--text-xl); line-height: var(--lh-xl); }
+  .principle dd { color: var(--ink-2); }
+
+  .member { padding-block: var(--s-4); }
+  .member > * + * { margin-top: var(--s-1); }
+
+  .cta { display: grid; gap: var(--s-5); justify-items: start; }
+  .cta-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+</style>

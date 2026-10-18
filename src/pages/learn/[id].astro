@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageBand from '../../components/PageBand.astro';
+import ListenButton from '../../components/ListenButton.astro';
+import PrintButton from '../../components/PrintButton.astro';
+import Disclaimer from '../../components/Disclaimer.astro';
+import SourceList from '../../components/SourceList.astro';
+import PagerLinks from '../../components/PagerLinks.astro';
+import { lessons, type Lesson } from '../../lib/content';
+
+export function getStaticPaths() {
+  return lessons.map((lesson, index) => ({ params: { id: lesson.id }, props: { lesson, index } }));
+}
+
+interface Props { lesson: Lesson; index: number }
+const { lesson, index } = Astro.props;
+const prev = lessons[index - 1];
+const next = lessons[index + 1];
+---
+<Base title={lesson.title} description={`${lesson.summary}. A ${lesson.minutes} minute lesson from Remember Together, with sources.`}>
+  <div data-listen-root>
+    <PageBand theme="learn" title={lesson.title} intro={lesson.summary + '.'} crumb={{ href: '/learn/', label: 'All lessons' }}>
+      <p class="lesson-meta no-listen">Lesson {index + 1} of {lessons.length}. About {lesson.minutes} minutes.</p>
+      <div class="band-actions no-print">
+        <ListenButton />
+        <PrintButton />
+      </div>
+    </PageBand>
+
+    <div class="section">
+      <div class="container lesson-layout">
+        <article class="prose lesson-body">
+          <p class="lead">{lesson.intro}</p>
+          {lesson.sections.map((section) => (
+            <>
+              <h2>{section.heading}</h2>
+              {section.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
+              {section.bullets && <ul>{section.bullets.map((bullet) => <li>{bullet}</li>)}</ul>}
+            </>
+          ))}
+        </article>
+
+        <aside class="lesson-aside">
+          <div class="tint tint--learn key-points">
+            <h2 class="key-title">The main points</h2>
+            <ul>
+              {lesson.keyPoints.map((point) => <li>{point}</li>)}
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="lesson-footer">
+      <Disclaimer />
+      <SourceList sources={lesson.sources} checked={lesson.lastChecked} />
+      <PagerLinks
+        prevLabel="Previous lesson"
+        nextLabel={next ? 'Next lesson' : 'Next'}
+        prev={prev && { href: `/learn/${prev.id}/`, title: prev.title }}
+        next={next ? { href: `/learn/${next.id}/`, title: next.title } : { href: '/caregivers/', title: 'Caregiver guides' }}
+      />
+    </div>
+  </div>
+</Base>
+
+<style>
+  .lesson-meta { font-weight: 700; }
+  .band-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); padding-top: var(--s-2); }
+
+  .lesson-layout { display: grid; gap: var(--s-7); }
+  @media (min-width: 64rem) {
+    .lesson-layout { grid-template-columns: repeat(12, 1fr); gap: var(--s-6); }
+    .lesson-body { grid-column: span 7; }
+    .lesson-aside { grid-column: 9 / span 4; }
+    .key-points { position: sticky; top: var(--s-6); }
+  }
+
+  .key-points > * + * { margin-top: var(--s-4); }
+  .key-title { font-size: var(--text-xl); line-height: var(--lh-xl); }
+  .key-points ul { padding-left: var(--s-5); }
+  .key-points li + li { margin-top: var(--s-2); }
+
+  .lesson-footer { display: grid; gap: var(--s-7); max-width: var(--measure); }
+</style>

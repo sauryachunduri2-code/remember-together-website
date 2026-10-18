@@ -1,0 +1,46 @@
+---
+// One labeled form field: text input, email, textarea or select.
+interface Props {
+  name: string;
+  label: string;
+  type?: 'text' | 'email' | 'tel' | 'number' | 'textarea' | 'select';
+  required?: boolean;
+  hint?: string;
+  autocomplete?: string;
+  options?: string[];
+  rows?: number;
+  maxlength?: number;
+  min?: number;
+  /** Message shown when the field is empty or not valid. */
+  error?: string;
+}
+
+const {
+  name, label, type = 'text', required = false, hint, autocomplete, options = [], rows = 6, maxlength, min, error,
+} = Astro.props;
+
+const id = `${Astro.props.name}-${Math.random().toString(36).slice(2, 7)}`;
+const hintId = hint ? `${id}-hint` : undefined;
+const errorId = `${id}-error`;
+const describedBy = [hintId, errorId].filter(Boolean).join(' ');
+const defaultError =
+  type === 'email' ? 'Please enter an email address, like name@example.com.' : `Please fill in ${label.toLowerCase()}.`;
+---
+<div class="field">
+  <label for={id}>
+    {label}
+    {!required && <span class="optional"> (optional)</span>}
+  </label>
+  {hint && <p class="hint" id={hintId}>{hint}</p>}
+  {type === 'textarea' ? (
+    <textarea class="input" id={id} name={name} rows={rows} required={required} maxlength={maxlength ?? 5000} aria-describedby={describedBy} data-error={error ?? defaultError}></textarea>
+  ) : type === 'select' ? (
+    <select class="input" id={id} name={name} required={required} aria-describedby={describedBy} data-error={error ?? `Please choose ${label.toLowerCase()}.`}>
+      <option value="">Choose one</option>
+      {options.map((option) => <option value={option}>{option}</option>)}
+    </select>
+  ) : (
+    <input class="input" id={id} name={name} type={type} required={required} autocomplete={autocomplete} maxlength={maxlength ?? 200} min={min} inputmode={type === 'number' ? 'numeric' : undefined} aria-describedby={describedBy} data-error={error ?? defaultError} />
+  )}
+  <p class="field-error" id={errorId} hidden></p>
+</div>

@@ -1,0 +1,26 @@
+---
+import type { Source } from '../lib/content';
+interface Props { sources: Source[]; checked?: string }
+const { sources, checked } = Astro.props;
+---
+<section class="sources" aria-labelledby="sources-title">
+  <h2 id="sources-title" class="sources-title">Sources</h2>
+  <ul role="list" class="sources-list">
+    {sources.map((source) => (
+      <li>
+        <a class="print-url" href={source.url} rel="noopener" target="_blank">{source.title}<span class="visually-hidden"> (opens in a new tab)</span></a>
+        <span class="muted">{source.name}</span>
+      </li>
+    ))}
+  </ul>
+  {checked && <p class="text-sm muted">Checked against these sources in {checked}.</p>}
+</section>
+
+<style>
+  .sources { border-top: var(--border); padding-top: var(--s-6); }
+  .sources > * + * { margin-top: var(--s-4); }
+  .sources-title { font-size: var(--text-xl); line-height: var(--lh-xl); }
+  .sources-list { display: grid; gap: var(--s-4); }
+  .sources-list li { display: grid; gap: var(--s-1); }
+  .sources-list a { font-weight: 700; }
+</style>

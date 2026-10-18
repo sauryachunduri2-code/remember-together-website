@@ -1,0 +1,108 @@
+---
+import Base from '../layouts/Base.astro';
+import PageBand from '../components/PageBand.astro';
+import Icon from '../components/Icon.astro';
+import { lessons, guides } from '../lib/content';
+
+const organizations = [
+  { name: 'Alzheimer’s Association', text: 'A free 24/7 helpline, local chapters, support groups and caregiver training.', url: 'https://www.alz.org/' },
+  { name: 'National Institute on Aging', text: 'Research-based health information about Alzheimer’s and related dementias from the U.S. government.', url: 'https://www.nia.nih.gov/health/alzheimers-and-dementia' },
+  { name: 'Centers for Disease Control and Prevention', text: 'Facts about dementia, brain health and lowering your risk.', url: 'https://www.cdc.gov/alzheimers-dementia/' },
+  { name: 'World Health Organization', text: 'The global picture: how many people live with dementia, and what helps.', url: 'https://www.who.int/news-room/fact-sheets/detail/dementia' },
+  { name: 'Eldercare Locator', text: 'Finds local services for older adults and their families, like meals, transport and respite care.', url: 'https://eldercare.acl.gov/' },
+];
+
+const comingNext = [
+  { title: 'Printable flyers', text: 'One page on the early warning signs, sized for a bulletin board.' },
+  { title: 'Talk slides', text: 'The slides from our community talks, for teachers and group leaders.' },
+  { title: 'Short videos', text: 'Plain, short explanations of what dementia is and how to help.' },
+];
+---
+<Base
+  title="Resources"
+  description="Free dementia lessons and caregiver guides you can read or print, plus trusted organizations for help, research and local services."
+>
+  <PageBand theme="plain" title="Resources" intro="Everything we have made, free to read, print and share, plus the organizations we trust for help and facts." />
+
+  <section class="section" aria-labelledby="print-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="print-title">Read or print</h2>
+        <p class="lead">Every lesson and guide prints as a clean handout. Open one and press Print, or use your browser&rsquo;s print button.</p>
+      </div>
+      <div class="lists">
+        <section aria-labelledby="lessons-title">
+          <h3 id="lessons-title" class="list-title"><span class="dot dot--learn" aria-hidden="true"></span>Lessons</h3>
+          <ul role="list" class="rows">
+            {lessons.map((lesson) => (
+              <li><a class="row-link" href={`/learn/${lesson.id}/`}><span><span class="row-title">{lesson.title}</span><span class="row-meta">{lesson.minutes} minute read</span></span><Icon name="chevron-right" /></a></li>
+            ))}
+          </ul>
+        </section>
+        <section aria-labelledby="guides-title">
+          <h3 id="guides-title" class="list-title"><span class="dot dot--care" aria-hidden="true"></span>Caregiver guides</h3>
+          <ul role="list" class="rows">
+            {guides.map((guide) => (
+              <li><a class="row-link" href={`/caregivers/${guide.id}/`}><span><span class="row-title">{guide.title}</span><span class="row-meta">{guide.summary}</span></span><Icon name="chevron-right" /></a></li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--rule" aria-labelledby="orgs-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="orgs-title">Organizations we trust</h2>
+        <p class="lead">Our lessons and guides are based on these sources. They go deeper than we can.</p>
+      </div>
+      <ul role="list" class="rows orgs">
+        {organizations.map((org) => (
+          <li>
+            <a class="row-link" href={org.url} rel="noopener" target="_blank">
+              <span>
+                <span class="row-title">{org.name}</span>
+                <span class="row-meta">{org.text}</span>
+              </span>
+              <Icon name="external" />
+              <span class="visually-hidden"> (opens in a new tab)</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--rule" aria-labelledby="next-title">
+    <div class="container grid-2">
+      <div class="stack">
+        <h2 id="next-title">Coming next</h2>
+        <p class="muted">We are making these now. They will appear on this page when they are ready.</p>
+        <a class="text-link" href="/get-involved/#updates">Get an email when they are out<Icon name="arrow-right" /></a>
+      </div>
+      <dl class="next">
+        {comingNext.map((item) => (
+          <div class="next-item">
+            <dt>{item.title}</dt>
+            <dd>{item.text}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lists { display: grid; gap: var(--s-7); }
+  @media (min-width: 56rem) { .lists { grid-template-columns: 1fr 1fr; gap: var(--s-6); } }
+  .list-title { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-4); }
+  .dot { width: var(--s-4); height: var(--s-4); border-radius: 50%; flex: none; }
+  .dot--learn { background: var(--learn-strong); }
+  .dot--care { background: var(--care-strong); }
+  .orgs { max-width: 48rem; }
+  .next { border-top: var(--border); }
+  .next-item { display: grid; align-content: start; gap: var(--s-1); padding-block: var(--s-5); border-bottom: var(--border); }
+  .next-item dt { font-weight: 700; font-size: var(--text-lg); line-height: var(--lh-lg); }
+  .next-item dd { color: var(--ink-2); }
+</style>

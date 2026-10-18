@@ -1,0 +1,70 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageBand from '../../components/PageBand.astro';
+import Icon from '../../components/Icon.astro';
+import { guides, guideGroups } from '../../lib/content';
+---
+<Base
+  title="Caregiver guides"
+  description="Step by step guides for the hard moments of caring for someone with dementia: evening confusion, wandering, repeated questions, anger, and everyday conversation."
+>
+  <PageBand
+    theme="care"
+    title="Caregiver guides"
+    intro="Short, step by step guides for the hard parts of caring for someone with dementia. Read one before a hard moment, or open it during one."
+  />
+
+  <section class="section">
+    <div class="container care-layout">
+      <div class="care-groups">
+        {guideGroups.map((group) => {
+          const items = guides.filter((guide) => guide.group === group.id);
+          if (!items.length) return null;
+          return (
+            <section aria-labelledby={`group-${group.id}`}>
+              <div class="group-head">
+                <h2 id={`group-${group.id}`}>{group.title}</h2>
+                <p class="muted">{group.intro}</p>
+              </div>
+              <ul role="list" class="rows">
+                {items.map((guide) => (
+                  <li>
+                    <a class="row-link" href={`/caregivers/${guide.id}/`}>
+                      <span>
+                        <span class="row-title">{guide.title}</span>
+                        <span class="row-meta">{guide.summary}</span>
+                      </span>
+                      <Icon name="chevron-right" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          );
+        })}
+      </div>
+
+      <aside class="care-aside" aria-labelledby="care-help-title">
+        <div class="tint tint--help stack">
+          <h2 id="care-help-title" class="aside-title">You do not have to do this alone</h2>
+          <p>The Alzheimer&rsquo;s Association Helpline is free and open day and night, for caregivers too.</p>
+          <a class="button button--help button--block" href="tel:18002723900"><Icon name="phone" />Call 1-800-272-3900</a>
+          <a class="text-link" href="/help/">All helplines<Icon name="arrow-right" /></a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .care-layout { display: grid; gap: var(--s-7); }
+  @media (min-width: 64rem) {
+    .care-layout { grid-template-columns: repeat(12, 1fr); gap: var(--s-6); }
+    .care-groups { grid-column: span 8; }
+    .care-aside { grid-column: 9 / span 4; }
+  }
+  .care-groups { display: grid; gap: var(--s-8); }
+  .group-head { margin-bottom: var(--s-5); }
+  .group-head > * + * { margin-top: var(--s-2); }
+  .aside-title { font-size: var(--text-xl); line-height: var(--lh-xl); }
+</style>
