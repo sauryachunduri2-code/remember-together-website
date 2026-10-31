@@ -3,7 +3,11 @@ import { collapse, conceal, drawCheck, expand, reveal } from './motion';
 
 type FieldElement = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 
-const TIMEOUT_MS = 15000;
+// Google Apps Script saves the row and sends two emails before it answers, which can take several seconds.
+// So the person sees "sent" after QUICK_MS at most, and delivery finishes in the background.
+const QUICK_MS = 900;
+const OUTBOX_KEY = 'rt-outbox';
+const OUTBOX_LIMIT = 20;
 
 function fieldsOf(form: HTMLFormElement): FieldElement[] {
   return Array.from(form.querySelectorAll<FieldElement>('input, textarea, select'));
@@ -81,20 +85,49 @@ function setLoading(button: HTMLButtonElement, loading: boolean) {
 }
 
 async function send(endpoint: string, data: Record<string, string>) {
-  const controller = new AbortController();
-  const timer = window.setTimeout(() => controller.abort(), TIMEOUT_MS);
+  // text/plain keeps this a "simple" request, which Google Apps Script accepts from any site.
+  // keepalive lets the request finish even if the person leaves the page right after.
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(data),
+    keepalive: true,
+  });
+  const result = await response.json().catch(() => ({ ok: response.ok }));
+  if (!response.ok || !result.ok) throw new Error(result.error ?? `Status ${response.status}`);
+}
+
+type Pending = { endpoint: string; data: Record<string, string> };
+
+function readOutbox(): Pending[] {
   try {
-    // text/plain keeps this a "simple" request, which Google Apps Script accepts from any site.
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(data),
-      signal: controller.signal,
-    });
-    const result = await response.json().catch(() => ({ ok: response.ok }));
-    if (!response.ok || !result.ok) throw new Error(result.error ?? `Status ${response.status}`);
-  } finally {
-    window.clearTimeout(timer);
+    return JSON.parse(localStorage.getItem(OUTBOX_KEY) ?? '[]');
+  } catch {
+    return [];
+  }
+}
+
+function writeOutbox(items: Pending[]) {
+  try {
+    localStorage.setItem(OUTBOX_KEY, JSON.stringify(items.slice(-OUTBOX_LIMIT)));
+  } catch {}
+}
+
+/** A submission that failed after the person was told it was sent is kept here and retried, so nothing is lost. */
+function queue(item: Pending) {
+  writeOutbox([...readOutbox(), item]);
+}
+
+async function flushOutbox() {
+  const items = readOutbox();
+  if (!items.length) return;
+  writeOutbox([]);
+  for (const item of items) {
+    try {
+      await send(item.endpoint, item.data);
+    } catch {
+      queue(item);
+    }
   }
 }
 
@@ -142,7 +175,12 @@ function wire(form: HTMLFormElement) {
 
     setLoading(button, true);
     try {
-      await send(endpoint, collect(form));
+      const data = collect(form);
+      const delivery = send(endpoint, data);
+      // Wait for a fast answer so real errors still show. If the server is slow, carry on and finish in the background.
+      const settled = delivery.then(() => 'sent' as const);
+      const outcome = await Promise.race([settled, new Promise<'slow'>((resolve) => window.setTimeout(() => resolve('slow'), QUICK_MS))]);
+      if (outcome === 'slow') delivery.catch(() => queue({ endpoint, data }));
       await conceal(form);
       reveal(success);
       success.focus();
@@ -166,6 +204,8 @@ function wire(form: HTMLFormElement) {
 }
 
 export function initForms() {
+  flushOutbox();
+  window.addEventListener('online', flushOutbox);
   document.querySelectorAll<HTMLFormElement>('form[data-rt-form]').forEach((form) => {
     if (form.dataset.wired) return;
     form.dataset.wired = 'true';
