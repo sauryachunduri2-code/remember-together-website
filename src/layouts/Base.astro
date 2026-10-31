@@ -1,5 +1,6 @@
 ---
 import '@fontsource/source-serif-4/latin-600.css';
+import '@fontsource/source-serif-4/latin-600-italic.css';
 import '@fontsource/atkinson-hyperlegible/latin-400.css';
 import '@fontsource/atkinson-hyperlegible/latin-700.css';
 import '../styles/global.css';
@@ -50,8 +51,7 @@ const imageUrl = new URL(image, site.url).href;
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#f6f1e7" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#10132b" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fffaf0" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Apply the saved text size before the page paints, so nothing jumps. -->
@@ -59,6 +59,18 @@ const imageUrl = new URL(image, site.url).href;
       try {
         var size = localStorage.getItem('rt-text-size');
         if (size === '2' || size === '3') document.documentElement.dataset.textSize = size;
+      } catch (e) {}
+    </script>
+
+    <!-- Content that eases in on scroll starts hidden only when motion is welcome and the script is on its way. -->
+    <script is:inline>
+      try {
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.add('js-motion');
+          setTimeout(function () {
+            if (!document.documentElement.dataset.motionReady) document.documentElement.classList.remove('js-motion');
+          }, 3000);
+        }
       } catch (e) {}
     </script>
 
@@ -85,6 +97,12 @@ const imageUrl = new URL(image, site.url).href;
     <p class="print-only">Printed from Remember Together, {site.url.replace('https://', '')}. Free dementia lessons and caregiver guides by HOSA students.</p>
     <Footer />
 
+    <script>
+      import { initCountUp, initReveal, initSunrise } from '../scripts/motion';
+      initReveal();
+      initCountUp();
+      initSunrise();
+    </script>
     <script>
       import { countVisit } from '../scripts/visits';
       // Missing pages are counted together as /404/, so mistyped addresses do not fill the sheet.

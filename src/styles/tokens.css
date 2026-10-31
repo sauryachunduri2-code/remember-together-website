@@ -6,9 +6,9 @@
 
 :root {
   /* Surfaces */
-  --paper: #f6f1e7;
-  --surface: #fffcf5;
-  --hairline: #d9d0be;
+  --paper: #fffaf0;
+  --surface: #fffefa;
+  --hairline: #e8dfc9;
 
   /* Text */
   --ink: #1a2147;
@@ -19,16 +19,17 @@
   --action-pressed: #112061;
   --on-action: #fffbf2;
 
-  /* The one featured block on a page */
-  --feature: #1b2d72;
-  --on-feature: #f6f1e7;
-  --on-feature-2: #c9cbe0;
+  /* The one featured block on a page. Sky blue, so it feels like open air and not a dark slab. */
+  --feature: #c5e3fa;
+  --on-feature: #1a2147;
+  --on-feature-2: #474d6d;
 
   /* Single highlight and calm positive accent */
   --gold: #f0b13a;
   --gold-pressed: #d9993a;
   --on-gold: #1a2147;
   --teal: #0f6b75;
+  --sun-tint: #fdf0c8;
 
   /* Section colors, matching the app's tabs. Color is never the only cue. */
   --home-tint: #d6e4f7;
@@ -75,6 +76,7 @@
 
   /* Shape. One radius and one border weight for every component. */
   --radius: 12px;
+  --radius-panel: 2rem;
   --border: 1px solid var(--hairline);
 
   /* Layout */
@@ -90,7 +92,7 @@
   --fast: 120ms;
   --base: 200ms;
 
-  color-scheme: light dark;
+  color-scheme: light;
 }
 
 @media (min-width: 48rem) {
@@ -99,36 +101,6 @@
 
 @media (min-width: 64rem) {
   :root { --gutter: var(--s-6); --section: var(--s-9); }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #10132b;
-    --surface: #1a1e3f;
-    --hairline: #3a406e;
-    --ink: #f4efe4;
-    --ink-2: #c9c6d6;
-    --action: #f2c14e;
-    --action-pressed: #d9a93a;
-    --on-action: #10132b;
-    --feature: #232a5e;
-    --on-feature: #f6f1e7;
-    --on-feature-2: #c9c6d6;
-    --gold: #f2c14e;
-    --gold-pressed: #d9a93a;
-    --teal: #6fd0d8;
-    --home-tint: #1e3566;   --home-strong: #9fb4f5;
-    --learn-tint: #34285f;  --learn-strong: #b7a5f0;
-    --play-tint: #4a3d14;   --play-strong: #f2c14e;
-    --care-tint: #16424a;   --care-strong: #6fd0d8;
-    --routine-tint: #2b3a14; --routine-strong: #a6d46a;
-    --help-tint: #4a2220;   --help-strong: #ff8a80;
-    --help-pressed: #ff6f63;
-    --on-help: #10132b;
-    --focus: #f2c14e;
-    --success: #6fd0d8;
-    --error: #ff8a80;
-  }
 }
 
 /* Text size control (A, A+, A++). Everything is in rem, so the whole page scales evenly. */

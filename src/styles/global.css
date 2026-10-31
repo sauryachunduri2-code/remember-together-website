@@ -35,6 +35,8 @@ h1, h2, h3 {
 h1 { font-size: var(--text-3xl); line-height: var(--lh-3xl); letter-spacing: -0.015em; }
 h2 { font-size: var(--text-2xl); line-height: var(--lh-2xl); letter-spacing: -0.01em; }
 h3 { font-size: var(--text-xl); line-height: var(--lh-xl); }
+/* One italic word per heading, in the spirit of an editorial headline. */
+h1 em, h2 em { font-style: italic; }
 h4 { font-size: var(--text-md); line-height: var(--lh-md); font-weight: 700; }
 p { text-wrap: pretty; }
 strong, b { font-weight: 700; }
@@ -72,6 +74,27 @@ a[href^='mailto:'] { overflow-wrap: anywhere; }
 .section + .section { padding-top: 0; }
 .section--rule { border-top: var(--border); }
 .section--rule.section { padding-top: var(--section); }
+
+/* A large rounded block that holds one section. Panels sit a little apart, so the color changes read as shapes. */
+.panel {
+  margin-inline: var(--s-2);
+  padding-block: var(--section);
+  border-radius: var(--radius-panel);
+}
+.panel + .panel { margin-top: var(--s-2); }
+@media (min-width: 64rem) { .panel { margin-inline: var(--s-5); } }
+.panel--sky { background: var(--feature); color: var(--on-feature); }
+.panel--sun { background: var(--sun-tint); }
+.panel--surface { background: var(--surface); border: var(--border); }
+.panel--lilac { background: var(--learn-tint); }
+
+.eyebrow {
+  font-size: var(--text-sm); line-height: var(--lh-sm); font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2);
+}
+
+/* Content that eases in as it scrolls into view. The js-motion class only exists when motion is welcome. */
+.js-motion [data-reveal]:not([data-revealed]) { opacity: 0; }
 
 .stack > * + * { margin-top: var(--stack, var(--s-4)); }
 
@@ -289,6 +312,7 @@ fieldset.field { border: 0; padding: 0; min-width: 0; }
     --learn-tint: #fff; --care-tint: #fff; --help-tint: #fff; --home-tint: #fff;
   }
   html { font-size: 11pt; }
+  .js-motion [data-reveal]:not([data-revealed]) { opacity: 1; }
   body { background: #fff; color: #000; }
   .no-print, .site-header, .site-footer, .utility-bar, .skip-link { display: none !important; }
   .print-only { display: block; margin: var(--s-6) auto 0; padding-top: var(--s-3); border-top: 1px solid #bbb; font-size: 9pt; max-width: var(--container); }

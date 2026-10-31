@@ -41,25 +41,29 @@ const ways = [
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <h1>Dementia lessons, caregiver guides and helplines in one free app.</h1>
-        <p class="lead">Remember Together is an iPhone and iPad app made by high school sophomores in HOSA. It helps families spot the early signs, get through hard caregiving moments, and find help fast.</p>
-        <ul role="list" class="facts">
+        <p class="eyebrow" data-reveal>A free app by HOSA students</p>
+        <h1 data-reveal>Dementia lessons, caregiver guides and <em>helplines</em> in one free app.</h1>
+        <p class="lead" data-reveal>Remember Together is an iPhone and iPad app made by high school sophomores in HOSA. It helps families spot the early signs, get through hard caregiving moments, and find help fast.</p>
+        <ul role="list" class="facts" data-reveal>
           <li><Icon name="check" />Free, with no ads and nothing to buy</li>
           <li><Icon name="check" />No account. Your information stays on your phone</li>
           <li><Icon name="check" />Large text and simple screens, made for older eyes</li>
         </ul>
 
-        <div class="launch card" id="notify">
+        <div class="launch card" id="notify" data-reveal>
           <h2 class="launch-title">Coming soon to the App Store</h2>
           <p class="muted">Leave your email and we will send one message on launch day.</p>
           <Form name="app-launch" submitLabel="Notify me" successTitle="You are on the list" successText="We will email you once on launch day. Until then, the lessons and guides are free to read on this site.">
             <Field name="email" label="Email address" type="email" required autocomplete="email" />
           </Form>
         </div>
-        <a class="text-link" href="/learn/">Or start now: read the lessons on this site<Icon name="arrow-right" /></a>
+        <a class="text-link" href="/learn/" data-reveal>Or start now: read the lessons on this site<Icon name="arrow-right" /></a>
       </div>
 
-      <div class="hero-visual">
+      <div class="hero-visual" data-reveal>
+        <span class="blob blob--sun" aria-hidden="true"></span>
+        <span class="blob blob--lilac" aria-hidden="true"></span>
+        <span class="blob blob--teal" aria-hidden="true"></span>
         <SunMark class="hero-sun" />
         <PhoneMock />
       </div>
@@ -67,8 +71,8 @@ const ways = [
   </section>
 
   <!-- HOSA -->
-  <section class="hosa" aria-labelledby="hosa-title">
-    <div class="container hosa-grid">
+  <section class="hosa panel panel--sky" aria-labelledby="hosa-title">
+    <div class="container hosa-grid" data-reveal>
       <div class="hosa-mark">
         {hosaLogo ? (
           <span class="hosa-plate"><Image src={hosaLogo} alt="HOSA Future Health Professionals" width={288} densities={[1, 2]} class="hosa-logo" /></span>
@@ -86,16 +90,16 @@ const ways = [
   </section>
 
   <!-- Why it matters -->
-  <section class="section" aria-labelledby="why-title">
+  <section class="panel panel--sun" aria-labelledby="why-title">
     <div class="container">
-      <div class="section-head">
-        <h2 id="why-title">Why we chose dementia</h2>
+      <div class="section-head" data-reveal>
+        <h2 id="why-title">Why we chose <em>dementia</em></h2>
         <p class="lead">It affects millions of people, and the people caring for them, often with little support.</p>
       </div>
       <dl class="stats">
         {statsData.stats.map((stat) => (
-          <div class="stat">
-            <dt class="stat-figure">{stat.figure}</dt>
+          <div class="stat" data-reveal>
+            <dt class="stat-figure" data-countup>{stat.figure}</dt>
             <dd>
               <p>{stat.text}</p>
               <p class="stat-source">{stat.source}</p>
@@ -103,7 +107,7 @@ const ways = [
           </div>
         ))}
       </dl>
-      <p class="text-sm muted stats-sources">
+      <p class="text-sm muted stats-sources" data-reveal>
         Sources:
         {statsData.sources.map((source, index) => (
           <>
@@ -116,16 +120,16 @@ const ways = [
   </section>
 
   <!-- What's in the app -->
-  <section class="section section--rule" aria-labelledby="app-title">
+  <section class="panel panel--surface" aria-labelledby="app-title">
     <div class="container app-grid">
-      <div class="app-intro">
+      <div class="app-intro" data-reveal>
         <h2 id="app-title">What the app does</h2>
         <p class="lead">Five parts, each with its own color, so it is always clear where you are. The same colors guide you around this site.</p>
         <p class="muted">Three parts, the lessons, the guides and the helplines, are also free to read here. You do not need the app to use them.</p>
       </div>
       <ul role="list" class="app-sections">
         {appSections.map((part) => (
-          <li class={`tint tint--${part.theme} app-section`}>
+          <li class={`tint tint--${part.theme} app-section`} data-reveal>
             <h3 class={`app-section-name name--${part.theme}`}>{part.name}</h3>
             <p>{part.text}</p>
             {part.href && <a class="text-link" href={part.href}>{part.cta}<Icon name="arrow-right" /></a>}
@@ -137,31 +141,31 @@ const ways = [
 
   <!-- Warning signs -->
   {signsLesson && (
-    <section class="section section--rule" aria-labelledby="signs-title">
+    <section class="panel panel--lilac" aria-labelledby="signs-title">
       <div class="container signs-grid">
-        <div class="signs-intro">
-          <h2 id="signs-title">Know the {signs.length} early signs</h2>
+        <div class="signs-intro" data-reveal>
+          <h2 id="signs-title">Know the {signs.length} early <em>signs</em></h2>
           <p class="lead">One sign on its own is not a diagnosis. What matters is a pattern of changes that keep happening and get in the way of daily life.</p>
           <a class="button button--primary" href={`/learn/${signsLesson.id}/`}>See each sign next to normal aging<Icon name="arrow-right" /></a>
         </div>
         <ol class="signs">
-          {signs.map((sign) => <li>{sign}</li>)}
+          {signs.map((sign) => <li data-reveal>{sign}</li>)}
         </ol>
       </div>
     </section>
   )}
 
   <!-- Get involved -->
-  <section class="section section--rule" aria-labelledby="involved-title">
+  <section class="section" aria-labelledby="involved-title">
     <div class="container involved-grid">
-      <div class="involved-intro">
-        <h2 id="involved-title">Get involved</h2>
+      <div class="involved-intro" data-reveal>
+        <h2 id="involved-title">Get <em>involved</em></h2>
         <p class="lead">Awareness spreads person to person. Here is how you can help it reach more families.</p>
         <a class="text-link" href={site.instagram.url} rel="noopener" target="_blank"><Icon name="instagram" class="icon--lead" />Follow @{site.instagram.handle}<span class="visually-hidden"> on Instagram (opens in a new tab)</span></a>
       </div>
       <ul role="list" class="rows">
         {ways.map((way) => (
-          <li>
+          <li data-reveal>
             <a class="row-link" href={way.href}>
               <span>
                 <span class="row-title">{way.title}</span>
@@ -178,7 +182,7 @@ const ways = [
 
 <style>
   /* Hero */
-  .hero { padding-block: var(--s-7) var(--section); }
+  .hero { padding-block: var(--s-7) var(--s-8); }
   .hero-grid { display: grid; gap: var(--s-7); align-items: start; }
   @media (min-width: 64rem) {
     .hero { padding-top: var(--s-8); }
@@ -188,6 +192,7 @@ const ways = [
   }
   .hero-copy > * + * { margin-top: var(--s-5); }
   .hero-copy h1 { max-width: 18ch; }
+  .hero-copy .eyebrow + h1 { margin-top: var(--s-3); }
   .hero-copy .lead { max-width: var(--measure); }
   .facts { display: grid; gap: var(--s-2); }
   .facts li { display: flex; gap: var(--s-3); align-items: flex-start; font-weight: 700; }
@@ -207,11 +212,21 @@ const ways = [
     overflow: hidden;
   }
   :global(.hero-sun) { position: absolute; top: var(--s-5); width: 8rem; color: var(--gold); }
+  /* Until the sun has risen, its parts wait invisible. Afterwards the rays glow slowly, one after another. */
+  :global(.js-motion .hero-sun:not(.sun--risen) .sun-arc),
+  :global(.js-motion .hero-sun:not(.sun--risen) .sun-ray) { opacity: 0; }
+  :global(.hero-sun.sun--risen .sun-ray) { animation: ray-glow 5s ease-in-out infinite; animation-delay: calc(var(--i) * 0.6s); }
+  @keyframes ray-glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
+
+  /* Soft color drifting behind the phone, like light moving across a room. */
+  .blob { position: absolute; border-radius: 50%; animation: drift 11s ease-in-out infinite alternate; }
+  .blob--sun { width: 11rem; height: 11rem; top: 18%; right: -3rem; background: radial-gradient(circle, var(--sun-tint) 0%, transparent 70%); }
+  .blob--lilac { width: 13rem; height: 13rem; bottom: 22%; left: -4rem; background: radial-gradient(circle, var(--learn-tint) 0%, transparent 70%); animation-duration: 14s; animation-delay: -4s; }
+  .blob--teal { width: 9rem; height: 9rem; top: 46%; right: 8%; background: radial-gradient(circle, var(--care-tint) 0%, transparent 70%); animation-duration: 9s; animation-delay: -2s; }
+  @keyframes drift { from { transform: translate(0, 0) scale(1); } to { transform: translate(1.5rem, -1.25rem) scale(1.12); } }
   .hero-visual :global(.phone) { position: relative; margin-bottom: calc(-1 * var(--s-8)); }
 
   /* HOSA */
-  .hosa { background: var(--feature); color: var(--on-feature); padding-block: var(--s-8); }
-  @media (min-width: 64rem) { .hosa { padding-block: var(--s-9); } }
   .hosa-grid { display: grid; gap: var(--s-6); align-items: center; }
   @media (min-width: 56rem) {
     .hosa-grid { grid-template-columns: repeat(12, 1fr); }
@@ -228,12 +243,11 @@ const ways = [
   .hosa-plate { display: inline-block; padding: var(--s-4) var(--s-5); background: #fff; border-radius: var(--radius); }
   .hosa-logo { display: block; width: 18rem; max-width: 100%; height: auto; }
   .hosa-link { color: var(--on-feature); }
-  .hosa-link:focus-visible { outline-color: var(--gold); }
 
   /* Stats */
-  .stats { display: grid; border-top: var(--border); }
+  .stats { display: grid; border-top: 1px solid rgb(26 33 71 / 0.15); }
   @media (min-width: 48rem) { .stats { grid-template-columns: 1fr 1fr; column-gap: var(--s-6); } }
-  .stat { display: grid; align-content: start; gap: var(--s-2); padding-block: var(--s-6); border-bottom: var(--border); }
+  .stat { display: grid; align-content: start; gap: var(--s-2); padding-block: var(--s-6); border-bottom: 1px solid rgb(26 33 71 / 0.15); }
   .stat-figure { font-family: var(--font-serif); font-weight: 600; font-size: var(--text-2xl); line-height: var(--lh-2xl); color: var(--ink); }
   .stat dd > * + * { margin-top: var(--s-2); }
   .stat dd p:first-child { font-size: var(--text-lg); line-height: var(--lh-lg); }
@@ -267,12 +281,12 @@ const ways = [
   }
   .signs-intro > * + * { margin-top: var(--s-5); }
   .signs-intro .button { white-space: normal; text-align: left; padding-block: var(--s-3); }
-  .signs { list-style: none; padding: 0; counter-reset: sign; border-top: var(--border); }
+  .signs { list-style: none; padding: 0; counter-reset: sign; border-top: 1px solid rgb(26 33 71 / 0.15); }
   .signs li {
     counter-increment: sign;
     display: flex; gap: var(--s-4); align-items: baseline;
     padding-block: var(--s-4);
-    border-bottom: var(--border);
+    border-bottom: 1px solid rgb(26 33 71 / 0.15);
     font-size: var(--text-lg); line-height: var(--lh-lg);
   }
   .signs li::before {

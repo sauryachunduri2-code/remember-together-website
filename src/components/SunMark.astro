@@ -1,8 +1,17 @@
 ---
 // The rising sun from the logo, drawn the same way as the app's SunMark.
+// The arc and each ray are separate paths so the home page can let the sun rise.
 interface Props { class?: string }
 const { class: className } = Astro.props;
+const rays = [
+  'M22.6 81.4L4.8 75.6',
+  'M44.5 51.2L33.5 36.1',
+  'M80 39.7L80 8.5',
+  'M115.5 51.2L126.5 36.1',
+  'M137.4 81.4L155.2 75.6',
+];
 ---
 <svg class:list={['sun-mark', className]} viewBox="0 0 160 104" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" aria-hidden="true" focusable="false">
-  <path d="M38.4 100A41.6 41.6 0 0 1 121.6 100M22.6 81.4L4.8 75.6M44.5 51.2L33.5 36.1M80 39.7L80 8.5M115.5 51.2L126.5 36.1M137.4 81.4L155.2 75.6" />
+  <path class="sun-arc" d="M38.4 100A41.6 41.6 0 0 1 121.6 100" />
+  {rays.map((d, i) => <path class="sun-ray" style={`--i:${i}`} d={d} />)}
 </svg>
