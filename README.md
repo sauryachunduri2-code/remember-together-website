@@ -1,5 +1,5 @@
 # Remember Together website
-Link: https://remembertogether.vercel.app/about/
+Link: https://remembertogether.vercel.app
 
 The campaign website for Remember Together, a HOSA Community Awareness project on dementia. Built with [Astro](https://astro.build) as a static site and hosted on Vercel.
 
